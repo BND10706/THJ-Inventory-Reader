@@ -216,8 +216,7 @@ public partial class MainPage : ContentPage
 		if (slot == AmmoSlot) return "Ammo";
 		return "Empty";
 	}
-
-	private async void LoadDefaultInventory()
+	private void LoadDefaultInventory()
 	{
 		try
 		{
@@ -253,11 +252,11 @@ Ammo	Platinum Tipped Arrow	234	200	0";
 		}
 		catch (Exception ex)
 		{
-			await DisplayAlert("Error", $"Failed to load default inventory: {ex.Message}", "OK");
+			// Since this is no longer async, we'll just use console output for errors
+			System.Diagnostics.Debug.WriteLine($"Failed to load default inventory: {ex.Message}");
 		}
 	}
-
-	private async void OnLoadDefaultClicked(object? sender, EventArgs e)
+	private void OnLoadDefaultClicked(object? sender, EventArgs e)
 	{
 		LoadDefaultInventory();
 		FileMenu.IsVisible = false;
