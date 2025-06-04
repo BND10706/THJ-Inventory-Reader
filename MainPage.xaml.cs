@@ -10,6 +10,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		InitializeEquipmentSlots();
+		LoadDefaultInventory();
 	}
 
 	private void InitializeEquipmentSlots()
@@ -214,5 +215,51 @@ public partial class MainPage : ContentPage
 		if (slot == RangeSlot) return "Range";
 		if (slot == AmmoSlot) return "Ammo";
 		return "Empty";
+	}
+
+	private async void LoadDefaultInventory()
+	{
+		try
+		{
+			// Create a default inventory with sample EverQuest items
+			var defaultInventoryData = @"Location	Name	ID	Count	Slots
+Head	Crown of the Froglok King	12034	1	8
+Neck	Necklace of Superiority	5521	1	0
+Ear	Black Sapphire Electrum Earring	14761	1	8
+Ear	Earring of the Solstice	19041	1	8
+Shoulders	Pauldrons of the Deep Flame	25987	1	8
+Arms	Sleeves of the Keeper	8942	1	8
+Wrist	Bracelet of Clarification	6633	1	8
+Wrist	Bracer of Benevolence	7455	1	8
+Hands	Gauntlets of Fiery Might	11287	1	8
+Chest	Breastplate of Virulent Protection	31045	1	8
+Back	Cloak of Flames	9876	1	8
+Waist	Belt of the Great Turtle	4521	1	8
+Legs	Greaves of the Penitent	18934	1	8
+Feet	Boots of the Storm	3456	1	8
+Ring	Ring of the Ancients	2134	1	8
+Ring	Band of Eternal Flame	7789	1	8
+Primary	Fiery Defender	20456	1	0
+Secondary	Shield of the Righteous	15678	1	0
+Range	Elvish Longbow	8901	1	0
+Ammo	Platinum Tipped Arrow	234	200	0";
+
+			ParseInventoryData(defaultInventoryData);
+
+			// Update UI to show character sheet
+			FileNameLabel.Text = "Default EverQuest Character";
+			MainContent.IsVisible = false;
+			InventoryView.IsVisible = true;
+		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Error", $"Failed to load default inventory: {ex.Message}", "OK");
+		}
+	}
+
+	private async void OnLoadDefaultClicked(object? sender, EventArgs e)
+	{
+		LoadDefaultInventory();
+		FileMenu.IsVisible = false;
 	}
 }

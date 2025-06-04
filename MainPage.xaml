@@ -35,9 +35,7 @@
                     FontSize="14"
                     HorizontalOptions="Center" />
             </StackLayout>
-        </ScrollView>
-
-        <!-- Hidden File Menu -->
+        </ScrollView>        <!-- Hidden File Menu -->
         <StackLayout x:Name="FileMenu" IsVisible="False" 
                      Grid.Row="1" 
                      BackgroundColor="White" 
@@ -45,131 +43,392 @@
                      VerticalOptions="Start"
                      HorizontalOptions="Start">
             <Button Text="Open Inventory File" Clicked="OnOpenFileClicked" />
+            <Button Text="Load Default Character" Clicked="OnLoadDefaultClicked" />
             <Button Text="Close" Clicked="OnCloseMenuClicked" />
-        </StackLayout>        <!-- EverQuest Character Sheet Display (Initially Hidden) -->
+        </StackLayout><!-- EverQuest Character Sheet Display (Initially Hidden) -->
         <ScrollView Grid.Row="1" x:Name="InventoryView" IsVisible="False">
             <StackLayout Padding="20">
                 <Label x:Name="FileNameLabel" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
                 
-                <!-- Character Sheet Layout -->
-                <Grid BackgroundColor="#2C2C2C" Padding="20" HorizontalOptions="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />  <!-- Head row -->
-                        <RowDefinition Height="60" />  <!-- Neck/Ears row -->
-                        <RowDefinition Height="60" />  <!-- Shoulders row -->
-                        <RowDefinition Height="60" />  <!-- Arms/Chest/Back row -->
-                        <RowDefinition Height="60" />  <!-- Hands/Waist row -->
-                        <RowDefinition Height="80" />  <!-- Character silhouette row -->
-                        <RowDefinition Height="60" />  <!-- Rings/Legs row -->
-                        <RowDefinition Height="60" />  <!-- Feet row -->
-                        <RowDefinition Height="60" />  <!-- Weapons row -->
-                        <RowDefinition Height="60" />  <!-- Range/Ammo row -->
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" />  <!-- Left side -->
-                        <ColumnDefinition Width="120" />  <!-- Left center -->
-                        <ColumnDefinition Width="120" />  <!-- Center -->
-                        <ColumnDefinition Width="120" />  <!-- Right center -->
-                        <ColumnDefinition Width="120" />  <!-- Right side -->
-                    </Grid.ColumnDefinitions>
-
+                <!-- EverQuest Authentic Character Sheet Layout -->
+                <Grid x:Name="CharacterSheetGrid" 
+                      BackgroundColor="#1a1a2e" 
+                      HorizontalOptions="Center" 
+                      VerticalOptions="Center"
+                      WidthRequest="500" 
+                      HeightRequest="450"
+                      Padding="15">
+                    
+                    <!-- Background will go here when you provide the image -->
+                    <!-- <Image x:Name="CharacterSheetBackground" 
+                           Source="inventory_background.png" 
+                           Aspect="Fill" 
+                           HorizontalOptions="Fill" 
+                           VerticalOptions="Fill" /> -->
+                    
+                    <!-- Equipment slots positioned to match EverQuest layout exactly -->
+                    
+                    <!-- LEFT SIDE EQUIPMENT (Head to Feet) -->
+                    
                     <!-- Head -->
-                    <Border Grid.Row="0" Grid.Column="2" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="HeadSlot" Text="Head" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-
-                    <!-- Ears -->
-                    <Border Grid.Row="1" Grid.Column="1" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="EarSlot1" Text="Ear" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-                    <Border Grid.Row="1" Grid.Column="3" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="EarSlot2" Text="Ear" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,20,0,0">
+                        <Label x:Name="HeadSlot" 
+                               Text="HEAD" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Neck -->
-                    <Border Grid.Row="1" Grid.Column="2" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="NeckSlot" Text="Neck" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,70,0,0">
+                        <Label x:Name="NeckSlot" 
+                               Text="NECK" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Shoulders -->
-                    <Border Grid.Row="2" Grid.Column="1" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="ShoulderSlot" Text="Shoulders" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-
-                    <!-- Arms -->
-                    <Border Grid.Row="3" Grid.Column="0" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="ArmsSlot" Text="Arms" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,120,0,0">
+                        <Label x:Name="ShoulderSlot" 
+                               Text="SHLD" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Chest -->
-                    <Border Grid.Row="3" Grid.Column="2" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="ChestSlot" Text="Chest" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-
-                    <!-- Back -->
-                    <Border Grid.Row="3" Grid.Column="4" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="BackSlot" Text="Back" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-
-                    <!-- Wrists -->
-                    <Border Grid.Row="4" Grid.Column="0" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="WristSlot1" Text="Wrist" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-                    <Border Grid.Row="4" Grid.Column="4" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="WristSlot2" Text="Wrist" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-
-                    <!-- Hands -->
-                    <Border Grid.Row="4" Grid.Column="1" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="HandsSlot" Text="Hands" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,170,0,0">
+                        <Label x:Name="ChestSlot" 
+                               Text="CHEST" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Waist -->
-                    <Border Grid.Row="4" Grid.Column="2" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="WaistSlot" Text="Waist" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-
-                    <!-- Character Silhouette -->
-                    <Border Grid.Row="5" Grid.Column="2" BackgroundColor="#3A3A3A" Stroke="#888" StrokeThickness="2" Padding="10">
-                        <Label Text="CHARACTER" TextColor="#AAA" HorizontalOptions="Center" VerticalOptions="Center" FontSize="12" FontAttributes="Bold" />
-                    </Border>
-
-                    <!-- Rings -->
-                    <Border Grid.Row="6" Grid.Column="1" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="RingSlot1" Text="Ring" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
-                    </Border>
-                    <Border Grid.Row="6" Grid.Column="3" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="RingSlot2" Text="Ring" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,220,0,0">
+                        <Label x:Name="WaistSlot" 
+                               Text="WAIST" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Legs -->
-                    <Border Grid.Row="6" Grid.Column="2" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="LegsSlot" Text="Legs" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,270,0,0">
+                        <Label x:Name="LegsSlot" 
+                               Text="LEGS" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Feet -->
-                    <Border Grid.Row="7" Grid.Column="2" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="FeetSlot" Text="Feet" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="20,320,0,0">
+                        <Label x:Name="FeetSlot" 
+                               Text="FEET" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
+                    <!-- RIGHT SIDE EQUIPMENT -->
+                    
+                    <!-- Ear 1 -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,20,0,0">
+                        <Label x:Name="EarSlot1" 
+                               Text="EAR" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Ear 2 -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,70,0,0">
+                        <Label x:Name="EarSlot2" 
+                               Text="EAR" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Arms -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,120,0,0">
+                        <Label x:Name="ArmsSlot" 
+                               Text="ARMS" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Wrist 1 -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,170,0,0">
+                        <Label x:Name="WristSlot1" 
+                               Text="WRIST" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Wrist 2 -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,220,0,0">
+                        <Label x:Name="WristSlot2" 
+                               Text="WRIST" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Hands -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,270,0,0">
+                        <Label x:Name="HandsSlot" 
+                               Text="HANDS" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Ring 1 -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,320,0,0">
+                        <Label x:Name="RingSlot1" 
+                               Text="RING" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Ring 2 -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="270,370,0,0">
+                        <Label x:Name="RingSlot2" 
+                               Text="RING" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- BOTTOM WEAPONS AREA -->
+                    
                     <!-- Primary Weapon -->
-                    <Border Grid.Row="8" Grid.Column="1" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="PrimarySlot" Text="Primary" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="100,370,0,0">
+                        <Label x:Name="PrimarySlot" 
+                               Text="PRI" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Secondary Weapon -->
-                    <Border Grid.Row="8" Grid.Column="3" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="SecondarySlot" Text="Secondary" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="150,370,0,0">
+                        <Label x:Name="SecondarySlot" 
+                               Text="SEC" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Range -->
-                    <Border Grid.Row="9" Grid.Column="1" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="RangeSlot" Text="Range" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="200,370,0,0">
+                        <Label x:Name="RangeSlot" 
+                               Text="RNG" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
                     </Border>
 
                     <!-- Ammo -->
-                    <Border Grid.Row="9" Grid.Column="3" BackgroundColor="#4A4A4A" Stroke="#777" StrokeThickness="1" Padding="5">
-                        <Label x:Name="AmmoSlot" Text="Ammo" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10" />
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="320,320,0,0">
+                        <Label x:Name="AmmoSlot" 
+                               Text="AMMO" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Back (positioned behind character area) -->
+                    <Border BackgroundColor="#2a2a3e" 
+                            Stroke="#555" 
+                            StrokeThickness="1"
+                            WidthRequest="40" 
+                            HeightRequest="40"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="320,270,0,0">
+                        <Label x:Name="BackSlot" 
+                               Text="BACK" 
+                               TextColor="White" 
+                               FontSize="8"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Character Model Area (center) -->
+                    <Border BackgroundColor="#1a1a2e" 
+                            Stroke="#666" 
+                            StrokeThickness="2"
+                            WidthRequest="120" 
+                            HeightRequest="200"
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            Margin="120,120,0,0">
+                        <Label Text="CHARACTER&#x0a;MODEL&#x0a;AREA" 
+                               TextColor="#888" 
+                               FontSize="10"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" 
+                               HorizontalTextAlignment="Center" />
                     </Border>
                 </Grid>
             </StackLayout>
