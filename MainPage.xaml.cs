@@ -171,7 +171,7 @@ public partial class MainPage : ContentPage
 			slot.TextColor = Colors.White;
 			slot.FontSize = 10;
 		}
-		
+
 		// Clear additional slots
 		EarSlot2.Text = "Ear";
 		EarSlot2.TextColor = Colors.White;
