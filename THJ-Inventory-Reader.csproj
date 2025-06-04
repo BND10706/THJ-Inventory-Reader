@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<!-- Temporarily targeting only Windows for easier development -->
+		<!-- Targeting Windows for primary development -->
 		<TargetFrameworks>net9.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Original targets: net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041.0 -->
+		<!-- Can add other targets later: net9.0-android;net9.0-ios;net9.0-maccatalyst -->
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
 

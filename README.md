@@ -1,6 +1,13 @@
 # THJ Inventory Reader
 
-A .NET MAUI cross-platform application for inventory management and reading.
+A .NET MAUI cross-platform application for reading and managing EverQuest character inventory files.
+
+## Features
+
+- **Simple File-Based Interface**: Clean menu-driven UI for opening inventory files
+- **EverQuest Inventory Support**: Reads tab-delimited inventory dump files
+- **Filtered Display**: Shows main equipment items (up to Ammo) with Location and Name columns
+- **Cross-Platform**: Runs on Windows, macOS, Android, and iOS
 
 ## Development Setup
 
@@ -33,22 +40,34 @@ This application is designed to run on:
 
 Note: Currently configured to target Windows primarily for development.
 
-### Development Notes
+## Usage
 
-- The project is set up for cross-platform development
-- Developed on macOS, targeting Windows as primary platform
-- Uses .NET MAUI for native cross-platform UI
-- Ready for deployment to Windows machines
+1. Launch the application
+2. Click "File" in the menu bar
+3. Select "Open Inventory File"
+4. Choose your EverQuest inventory dump text file
+5. View the parsed inventory data showing equipped items
+
+## Inventory File Format
+
+The application expects tab-delimited text files with the following format:
+
+```
+Location	Name	ID	Count	Slots
+Charm	Intricate Wooden Figurine (Legendary)	2035004	1	6
+...
+```
+
+Currently displays main equipment slots up to and including the Ammo slot.
 
 ## Project Structure
 
-- `MainPage.xaml/cs` - Main application page
+- `MainPage.xaml/cs` - Main application interface with file menu and inventory display
+- `SampleInventory.txt` - Example EverQuest inventory file for testing
 - `App.xaml/cs` - Application entry point
 - `AppShell.xaml/cs` - Application shell and navigation
 - `Platforms/` - Platform-specific code
 - `Resources/` - Images, fonts, styles, and other resources
-
-## Next Steps
 
 1. Push to GitHub repository
 2. Pull on Windows development machine

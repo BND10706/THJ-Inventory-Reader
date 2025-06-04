@@ -1,32 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="THJ_Inventory_Reader.MainPage">
+             x:Class="THJ_Inventory_Reader.MainPage"
+             Title="THJ Inventory Reader">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" />            <Label
-                Text="THJ Inventory Reader"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Label
-                Text="Inventory Management System&#10;Ready for Configuration"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="THJ Inventory Management System" />            <Button
-                x:Name="CounterBtn"
-                Text="Start Inventory Reader" 
-                SemanticProperties.Hint="Initialize the inventory reading system"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
-        </VerticalStackLayout>
-    </ScrollView>
+        <!-- Menu Bar -->
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10" BackgroundColor="#F0F0F0">
+            <Button Text="File" x:Name="FileMenuBtn" Clicked="OnFileMenuClicked" />
+        </StackLayout>
+
+        <!-- Main Content Area -->
+        <ScrollView Grid.Row="1" x:Name="MainContent">
+            <StackLayout Padding="20" x:Name="WelcomeView">
+                <Label 
+                    Text="THJ Inventory Reader"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Margin="0,20,0,10" />
+                <Label 
+                    Text="EverQuest Character Inventory Manager"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    TextColor="Gray"
+                    Margin="0,0,0,30" />
+                <Label 
+                    Text="Use the File menu to open an inventory file"
+                    FontSize="14"
+                    HorizontalOptions="Center" />
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Hidden File Menu -->
+        <StackLayout x:Name="FileMenu" IsVisible="False" 
+                     Grid.Row="1" 
+                     BackgroundColor="White" 
+                     Margin="10,0,0,0"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start">
+            <Button Text="Open Inventory File" Clicked="OnOpenFileClicked" />
+            <Button Text="Close" Clicked="OnCloseMenuClicked" />
+        </StackLayout>
+
+        <!-- Inventory Display Area (Initially Hidden) -->
+        <ScrollView Grid.Row="1" x:Name="InventoryView" IsVisible="False">
+            <StackLayout Padding="20">
+                <Label x:Name="FileNameLabel" FontSize="18" FontAttributes="Bold" Margin="0,0,0,20" />
+                
+                <!-- Header -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Location" FontAttributes="Bold" BackgroundColor="#E0E0E0" Padding="10" />
+                    <Label Grid.Column="1" Text="Name" FontAttributes="Bold" BackgroundColor="#E0E0E0" Padding="10" />
+                </Grid>
+
+                <!-- Inventory Items List -->
+                <CollectionView x:Name="InventoryList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Location}" Padding="10" />
+                                <Label Grid.Column="1" Text="{Binding Name}" Padding="10" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 
 </ContentPage>

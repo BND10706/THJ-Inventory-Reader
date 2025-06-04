@@ -1,0 +1,256 @@
+Location	Name	ID	Count	Slots
+Charm	Intricate Wooden Figurine (Legendary)	2035004	1	6
+Ear	Signet of Might (Legendary)	2016255	1	6
+Ear-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Ear-Slot2	Polished Egg of Rage	24133	1	6
+Head	Cap of Flowing Time (Legendary)	2028648	1	6
+Head-Slot1	Polished Chunk of Rage (Enchanted)	1069457	1	6
+Head-Slot2	Empty	0	0	0
+Head-Slot6	Empty	0	0	0
+Face	Great Mask of Flame (Legendary)	2012592	1	6
+Face-Slot1	Polished Egg of Rage (Legendary)	2024133	1	6
+Face-Slot2	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Ear	Signet of Might (Legendary)	2016255	1	6
+Ear-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Ear-Slot2	Polished Egg of Rage (Legendary)	2024133	1	6
+Neck	Collar of Catastrophe (Legendary)	2008977	1	6
+Neck-Slot1	Polished Egg of Rage (Legendary)	2024133	1	6
+Neck-Slot2	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Shoulders	Mantle of Deadly Precision (Legendary)	2028658	1	6
+Shoulders-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Shoulders-Slot2	Polished Egg of Rage (Legendary)	2024133	1	6
+Arms	Temporal Chainmail Sleeves (Legendary)	2068197	1	6
+Arms-Slot1	Polished Chunk of Rage	69457	1	6
+Arms-Slot2	Prismatic Scale of Sharpshooting (Legendary)	2009600	1	6
+Arms-Slot6	Empty	0	0	0
+Back	Cape of Endless Torment (Legendary)	2021998	1	6
+Back-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Back-Slot2	Polished Egg of Rage (Legendary)	2024133	1	6
+Wrist	Bracer of Timeless Rage (Legendary)	2068198	1	6
+Wrist-Slot1	Polished Chunk of Rage (Enchanted)	1069457	1	6
+Wrist-Slot2	Empty	0	0	0
+Wrist-Slot6	Empty	0	0	0
+Wrist	Bracer of Timeless Rage (Legendary)	2068198	1	6
+Wrist-Slot1	Polished Chunk of Rage	69457	1	6
+Wrist-Slot2	Prismatic Scale of Cleaving (Legendary)	2001801	1	6
+Wrist-Slot6	Empty	0	0	0
+Range	Bow of the Tempest (Legendary)	2027818	1	6
+Range-Slot1	Polished Chunk of Rage	69457	1	6
+Range-Slot2	Dioptase Gem	51716	1	6
+Range-Slot3	Dioptase Segment	51715	1	6
+Range-Slot6	Glamour - 'Thrum, Bow of the Stars'	705638	1	6
+Hands	Do`Vassir's Gauntlets of Might (Legendary)	2031227	1	6
+Hands-Slot1	Polished Chunk of Rage (Enchanted)	1069457	1	6
+Hands-Slot2	Empty	0	0	0
+Hands-Slot6	Empty	0	0	0
+Primary	Jagged Timeforged Blade (Legendary)	2024692	1	6
+Primary-Slot1	Diaku Armor Fragment (Enchanted)	1051912	1	6
+Primary-Slot2	Lethal Fragment of Truth (Enchanted)	1009540	1	6
+Primary-Slot6	Empty	0	0	0
+Secondary	Whorl of Unnatural Forces (Legendary)	2027280	1	6
+Secondary-Slot1	Diaku Armor Fragment	51912	1	6
+Secondary-Slot2	Diaku Armor Fragment (Enchanted)	1051912	1	6
+Secondary-Slot6	Empty	0	0	0
+Fingers	Prismatic Ring of Resistance (Legendary)	2026989	1	6
+Fingers-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Fingers-Slot2	Polished Egg of Rage (Legendary)	2024133	1	6
+Fingers	Prismatic Ring of Resistance (Legendary)	2026989	1	6
+Fingers-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Fingers-Slot2	Polished Egg of Rage (Legendary)	2024133	1	6
+Chest	Askr's Thunderous Chainmail (Legendary)	2047647	1	6
+Chest-Slot1	Empty	0	0	0
+Chest-Slot2	Prismatic Scale of Blocking (Legendary)	2009601	1	6
+Chest-Slot6	Empty	0	0	0
+Legs	Leggings of Furious Might (Legendary)	2028651	1	6
+Legs-Slot1	Polished Chunk of Rage	69457	1	6
+Legs-Slot2	Empty	0	0	0
+Legs-Slot6	Empty	0	0	0
+Feet	Shoes of Fleeting Fury (Legendary)	2026986	1	6
+Feet-Slot1	Polished Chunk of Rage	69457	1	6
+Feet-Slot2	Empty	0	0	0
+Feet-Slot6	Empty	0	0	0
+Waist	Gleaming Mesh Girdle (Legendary)	2012510	1	6
+Waist-Slot1	Flawless Egg of Deftness (Legendary)	2024137	1	6
+Waist-Slot2	Polished Egg of Rage (Legendary)	2024133	1	6
+	Silver Hoop of Speed (Enchanted)	1007123	1	6
+-Slot1	Empty	0	0	0
+-Slot2	Empty	0	0	0
+Ammo	Blessed Champion Arrows (Legendary)	2024493	1	6
+General1	Fleeting Quiver	17327	1	6
+General1-Slot1	Blessed Champion Arrows (Legendary)	2024493	1	6
+General1-Slot2	Empty	0	0	0
+General1-Slot3	Empty	0	0	0
+General1-Slot4	Empty	0	0	0
+General1-Slot5	Empty	0	0	0
+General1-Slot6	Empty	0	0	0
+General2	Boar Chops	29771	96	6
+General3	Backpack	17005	1	8
+General3-Slot1	Water Flask	13006	49	6
+General3-Slot2	Chocolate Bunny	64353	2	6
+General3-Slot3	Stained Parchment Top	28010	1	6
+General3-Slot4	Tanaan Smithing Hammer	29546	1	6
+General3-Slot5	Ethereal Sheet of Metal	16283	1	6
+General3-Slot6	Empty	0	0	0
+General3-Slot7	Assorted Jellybeans	24138	31	6
+General3-Slot8	Empty	0	0	0
+General4	Empty	0	0	0
+General5	Disenchanted Backpack	77774	1	6
+General5-Slot1	Empty	0	0	0
+General5-Slot2	Empty	0	0	0
+General5-Slot3	Empty	0	0	0
+General5-Slot4	Empty	0	0	0
+General5-Slot5	Empty	0	0	0
+General5-Slot6	Empty	0	0	0
+General6	Backpack	17005	1	8
+General6-Slot1	Empty	0	0	0
+General6-Slot2	Empty	0	0	0
+General6-Slot3	Empty	0	0	0
+General6-Slot4	Empty	0	0	0
+General6-Slot5	Empty	0	0	0
+General6-Slot6	Empty	0	0	0
+General6-Slot7	Empty	0	0	0
+General6-Slot8	Empty	0	0	0
+General7	Backpack	17005	1	8
+General7-Slot1	Empty	0	0	0
+General7-Slot2	Book of Souls	28016	1	6
+General7-Slot2-Slot1	Empty	0	0	0
+General7-Slot2-Slot2	Empty	0	0	0
+General7-Slot2-Slot6	Empty	0	0	0
+General7-Slot3	Empty	0	0	0
+General7-Slot4	Empty	0	0	0
+General7-Slot5	Empty	0	0	0
+General7-Slot6	Empty	0	0	0
+General7-Slot7	Mortar and Pestle	17904	1	6
+General7-Slot7-Slot1	Empty	0	0	0
+General7-Slot7-Slot2	Empty	0	0	0
+General7-Slot7-Slot3	Empty	0	0	0
+General7-Slot7-Slot4	Empty	0	0	0
+General7-Slot7-Slot5	Empty	0	0	0
+General7-Slot7-Slot6	Empty	0	0	0
+General7-Slot8	Mask of Tinkering (Legendary)	2001135	1	6
+General7-Slot8-Slot1	Empty	0	0	0
+General7-Slot8-Slot2	Empty	0	0	0
+General8	Backpack	17005	1	8
+General8-Slot1	Arx Key	3650	1	6
+General8-Slot2	Band of Prismatic Focus (Legendary)	2026991	1	6
+General8-Slot2-Slot1	Empty	0	0	0
+General8-Slot2-Slot2	Empty	0	0	0
+General8-Slot3	Empty	0	0	0
+General8-Slot4	Band of Prismatic Focus (Legendary)	2026991	1	6
+General8-Slot4-Slot1	Empty	0	0	0
+General8-Slot4-Slot2	Empty	0	0	0
+General8-Slot5	Primal Velium Reinforced Bow (Legendary)	2027326	1	6
+General8-Slot5-Slot1	Empty	0	0	0
+General8-Slot5-Slot2	Empty	0	0	0
+General8-Slot5-Slot3	Empty	0	0	0
+General8-Slot5-Slot6	Empty	0	0	0
+General8-Slot6	Perfected Augmentation Distiller	52023	13	6
+General8-Slot7	Yttrium-Imbued Oak Bow (Legendary)	2009243	1	6
+General8-Slot7-Slot1	Empty	0	0	0
+General8-Slot7-Slot2	Dioptase Gem	51716	1	6
+General8-Slot7-Slot3	Dioptase Segment	51715	1	6
+General8-Slot7-Slot6	Empty	0	0	0
+General8-Slot8	Glamour - 'Bunnyfist of Glory'	24116	1	6
+General9	Druid's Syncrosatchel	899981	1	4
+General9-Slot1	Hammer of Holy Vengeance (Enchanted)	1020627	1	6
+General9-Slot1-Slot1	Empty	0	0	0
+General9-Slot1-Slot2	Empty	0	0	0
+General9-Slot1-Slot6	Empty	0	0	0
+General9-Slot2	Ragebringer (Legendary)	2011057	1	6
+General9-Slot2-Slot1	Empty	0	0	0
+General9-Slot2-Slot2	Empty	0	0	0
+General9-Slot2-Slot6	Empty	0	0	0
+General9-Slot3	Sal`Varae's Robe of Darkness (Legendary)	2031239	1	6
+General9-Slot3-Slot1	Empty	0	0	0
+General9-Slot3-Slot2	Empty	0	0	0
+General9-Slot3-Slot6	Empty	0	0	0
+General9-Slot4	Girdle of Intense Durability	28664	1	6
+General9-Slot4-Slot1	Empty	0	0	0
+General9-Slot4-Slot2	Empty	0	0	0
+General10	Easter Basket (Enchanted)	1024132	1	24
+General10-Slot1	Serrated Dart of Energy (Enchanted)	1020625	1	6
+General10-Slot1-Slot1	Empty	0	0	0
+General10-Slot1-Slot2	Empty	0	0	0
+General10-Slot1-Slot6	Empty	0	0	0
+General10-Slot2	Fervid Gloves of the Warder (Legendary)	2028104	1	6
+General10-Slot2-Slot1	Empty	0	0	0
+General10-Slot2-Slot2	Empty	0	0	0
+General10-Slot2-Slot6	Empty	0	0	0
+General10-Slot3	Band of Primordial Energy (Enchanted)	1026990	1	6
+General10-Slot3-Slot1	Empty	0	0	0
+General10-Slot3-Slot2	Empty	0	0	0
+General10-Slot4	Empty	0	0	0
+General10-Slot5	Empty	0	0	0
+General10-Slot6	Elder's Armbands of Ro (Legendary)	2028145	1	6
+General10-Slot6-Slot1	Empty	0	0	0
+General10-Slot6-Slot2	Empty	0	0	0
+General10-Slot6-Slot6	Empty	0	0	0
+General10-Slot7	Stanos' Wicked Breastplate (Legendary)	2015474	1	6
+General10-Slot7-Slot1	Empty	0	0	0
+General10-Slot7-Slot2	Empty	0	0	0
+General10-Slot7-Slot6	Empty	0	0	0
+General10-Slot8	Empty	0	0	0
+General10-Slot9	Empty	0	0	0
+General10-Slot10	Empty	0	0	0
+General10-Slot11	Hammer of Hours (Legendary)	2021886	1	6
+General10-Slot11-Slot1	Empty	0	0	0
+General10-Slot11-Slot2	Empty	0	0	0
+General10-Slot11-Slot6	Empty	0	0	0
+General10-Slot12	Blackflame Sphere (Legendary)	2020507	1	6
+General10-Slot12-Slot1	Empty	0	0	0
+General10-Slot12-Slot2	Empty	0	0	0
+General10-Slot12-Slot6	Empty	0	0	0
+General10-Slot13	Easter Egg	24131	1	6
+General10-Slot14	Empty	0	0	0
+General10-Slot15	Empty	0	0	0
+General10-Slot16	Symbol of the Planemasters (Enchanted)	1020898	1	6
+General10-Slot16-Slot1	Empty	0	0	0
+General10-Slot16-Slot2	Empty	0	0	0
+General10-Slot16-Slot6	Empty	0	0	0
+General10-Slot17	Anger of the Shissar XI	47562	60	6
+General10-Slot18	Vengeful Mail of the Void (Legendary)	2030564	1	6
+General10-Slot18-Slot1	Empty	0	0	0
+General10-Slot18-Slot2	Empty	0	0	0
+General10-Slot18-Slot6	Empty	0	0	0
+General10-Slot19	Empty	0	0	0
+General10-Slot20	Empty	0	0	0
+General10-Slot21	Wand of the Vortex (Legendary)	2026899	1	6
+General10-Slot21-Slot1	Empty	0	0	0
+General10-Slot21-Slot2	Empty	0	0	0
+General10-Slot21-Slot6	Empty	0	0	0
+General10-Slot22	Hopebringer (Legendary)	2023498	1	6
+General10-Slot22-Slot1	Empty	0	0	0
+General10-Slot22-Slot2	Empty	0	0	0
+General10-Slot22-Slot6	Empty	0	0	0
+General10-Slot23	Gavel of Justice (Legendary)	2021798	1	6
+General10-Slot23-Slot1	Empty	0	0	0
+General10-Slot23-Slot2	Empty	0	0	0
+General10-Slot23-Slot6	Empty	0	0	0
+General10-Slot24	Empty	0	0	0
+Held	Empty	0	0	0
+Bank1	Empty	0	0	0
+Bank2	Empty	0	0	0
+Bank3	Empty	0	0	0
+Bank4	Empty	0	0	0
+Bank5	Empty	0	0	0
+Bank6	Empty	0	0	0
+Bank7	Empty	0	0	0
+Bank8	Empty	0	0	0
+Bank9	Empty	0	0	0
+Bank10	Empty	0	0	0
+Bank11	Empty	0	0	0
+Bank12	Empty	0	0	0
+Bank13	Empty	0	0	0
+Bank14	Empty	0	0	0
+Bank15	Empty	0	0	0
+Bank16	Empty	0	0	0
+Bank17	Empty	0	0	0
+Bank18	Empty	0	0	0
+Bank19	Empty	0	0	0
+Bank20	Empty	0	0	0
+Bank21	Empty	0	0	0
+Bank22	Empty	0	0	0
+Bank23	Empty	0	0	0
+Bank24	Empty	0	0	0
+SharedBank1	Empty	0	0	0
+SharedBank2	Empty	0	0	0
