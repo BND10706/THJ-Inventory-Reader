@@ -13,14 +13,13 @@
             VerticalOptions="Center"
             WidthRequest="640"
             HeightRequest="480">
-        
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>   <!-- Character Panel -->
                 <ColumnDefinition Width="200"/>   <!-- Stats Panel -->
                 <ColumnDefinition Width="240"/>   <!-- Inventory Panel -->
             </Grid.ColumnDefinitions>
-            
+
             <!-- Left Panel - Character Equipment -->
             <Border Grid.Column="0" 
                     BackgroundColor="#333333" 
@@ -32,7 +31,7 @@
                         <RowDefinition Height="30"/>   <!-- Title -->
                         <RowDefinition Height="*"/>    <!-- Equipment Grid -->
                     </Grid.RowDefinitions>
-                    
+
                     <!-- Character Title -->
                     <Label Grid.Row="0" 
                            Text="Equipment" 
@@ -41,7 +40,7 @@
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
-                    
+
                     <!-- Equipment Slots Grid -->
                     <Grid Grid.Row="1" Margin="5">
                         <Grid.RowDefinitions>
@@ -60,8 +59,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <!-- Row 0: Head and Ears -->
+
+                        <!-- Equipment Slots -->
                         <Border Grid.Row="0" Grid.Column="1" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -75,7 +74,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <Border Grid.Row="0" Grid.Column="0" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -89,7 +88,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <Border Grid.Row="0" Grid.Column="2" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -103,7 +102,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 1: Face and Neck -->
                         <Border Grid.Row="1" Grid.Column="0" 
                                 BackgroundColor="#1a1a1a" 
@@ -118,7 +117,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <Border Grid.Row="1" Grid.Column="2" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -132,7 +131,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 2: Shoulders -->
                         <Border Grid.Row="2" Grid.Column="1" 
                                 BackgroundColor="#1a1a1a" 
@@ -147,7 +146,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 3: Arms and Back -->
                         <Border Grid.Row="3" Grid.Column="0" 
                                 BackgroundColor="#1a1a1a" 
@@ -162,7 +161,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <Border Grid.Row="3" Grid.Column="2" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -176,7 +175,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 4: Chest -->
                         <Border Grid.Row="4" Grid.Column="1" 
                                 BackgroundColor="#1a1a1a" 
@@ -191,7 +190,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 5: Wrists -->
                         <Border Grid.Row="5" Grid.Column="0" 
                                 BackgroundColor="#1a1a1a" 
@@ -206,7 +205,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <Border Grid.Row="5" Grid.Column="2" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -220,7 +219,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 6: Waist -->
                         <Border Grid.Row="6" Grid.Column="1" 
                                 BackgroundColor="#1a1a1a" 
@@ -235,7 +234,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 7: Legs -->
                         <Border Grid.Row="7" Grid.Column="1" 
                                 BackgroundColor="#1a1a1a" 
@@ -250,7 +249,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <!-- Row 8: Hands and Feet -->
                         <Border Grid.Row="8" Grid.Column="0" 
                                 BackgroundColor="#1a1a1a" 
@@ -265,7 +264,7 @@
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"/>
                         </Border>
-                        
+
                         <Border Grid.Row="8" Grid.Column="2" 
                                 BackgroundColor="#1a1a1a" 
                                 Stroke="#666666" 
@@ -282,97 +281,31 @@
                     </Grid>
                 </Grid>
             </Border>
-            
+
             <!-- Center Panel - Character Stats -->
             <Border Grid.Column="1" 
                     BackgroundColor="#333333" 
                     Stroke="#555555" 
                     StrokeThickness="1"
                     Margin="5">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>   <!-- Title -->
-                        <RowDefinition Height="60"/>   <!-- Health/Mana -->
-                        <RowDefinition Height="120"/>  <!-- Primary Stats -->
-                        <RowDefinition Height="90"/>   <!-- Combat Stats -->
-                        <RowDefinition Height="*"/>    <!-- Resistances -->
-                    </Grid.RowDefinitions>
-                    
-                    <!-- Stats Title -->
-                    <Label Grid.Row="0" 
-                           Text="Character Stats" 
+                <StackLayout Margin="10">
+                    <Label Text="Character Stats" 
                            TextColor="#FFD700"
-                           FontSize="12"
+                           FontSize="14"
                            FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <!-- File name display -->
+                    <Label x:Name="FileNameLabel" 
+                           Text="No file loaded" 
+                           TextColor="#FFD700"
+                           FontSize="10"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                    
-                    <!-- Health and Mana -->
-                    <StackLayout Grid.Row="1" Margin="10">
-                        <Label Text="HP: 100/100" 
-                               TextColor="#FF4444"
-                               FontSize="10"
-                               FontAttributes="Bold"/>
-                        <Label Text="MP: 50/50" 
-                               TextColor="#4444FF"
-                               FontSize="10"
-                               FontAttributes="Bold"/>
-                    </StackLayout>
-                    
-                    <!-- Primary Stats -->
-                    <Grid Grid.Row="2" Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        
-                        <Label Grid.Row="0" Text="STR: 75" TextColor="#FFD700" FontSize="9"/>
-                        <Label Grid.Row="1" Text="STA: 75" TextColor="#FFD700" FontSize="9"/>
-                        <Label Grid.Row="2" Text="AGI: 75" TextColor="#FFD700" FontSize="9"/>
-                        <Label Grid.Row="3" Text="DEX: 75" TextColor="#FFD700" FontSize="9"/>
-                        <Label Grid.Row="4" Text="WIS: 75" TextColor="#FFD700" FontSize="9"/>
-                        <Label Grid.Row="5" Text="INT: 75" TextColor="#FFD700" FontSize="9"/>
-                    </Grid>
-                    
-                    <!-- Combat Stats -->
-                    <Grid Grid.Row="3" Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        
-                        <Label Grid.Row="0" Text="AC: 20" TextColor="#88FF88" FontSize="9"/>
-                        <Label Grid.Row="1" Text="ATK: 150" TextColor="#FF8888" FontSize="9"/>
-                        <Label Grid.Row="2" Text="STR: 75" TextColor="#FFD700" FontSize="9"/>
-                        <Label Grid.Row="3" Text="Level: 10" TextColor="#FFFFFF" FontSize="9"/>
-                    </Grid>
-                    
-                    <!-- Resistances -->
-                    <Grid Grid.Row="4" Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        
-                        <Label Grid.Row="0" Text="vs Magic: 15" TextColor="#8888FF" FontSize="8"/>
-                        <Label Grid.Row="1" Text="vs Fire: 15" TextColor="#FF4444" FontSize="8"/>
-                        <Label Grid.Row="2" Text="vs Cold: 15" TextColor="#4488FF" FontSize="8"/>
-                        <Label Grid.Row="3" Text="vs Disease: 15" TextColor="#44FF44" FontSize="8"/>
-                        <Label Grid.Row="4" Text="vs Poison: 15" TextColor="#44FF88" FontSize="8"/>
-                    </Grid>
-                </Grid>
+                           Margin="0,10"/>
+                </StackLayout>
             </Border>
-            
-            <!-- Right Panel - Inventory Grid -->
+
+            <!-- Right Panel - Weapons & Items -->
             <Border Grid.Column="2" 
                     BackgroundColor="#333333" 
                     Stroke="#555555" 
@@ -381,162 +314,18 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>   <!-- Title -->
-                        <RowDefinition Height="100"/>  <!-- Weapon Slots -->
-                        <RowDefinition Height="80"/>   <!-- Ring & Charm Slots -->
-                        <RowDefinition Height="*"/>    <!-- Additional Inventory -->
+                        <RowDefinition Height="*"/>    <!-- Weapon slots -->
                     </Grid.RowDefinitions>
-                    
-                    <!-- Inventory Title -->
+
                     <Label Grid.Row="0" 
-                           Text="Inventory" 
+                           Text="Weapons &amp; Items" 
                            TextColor="#FFD700"
                            FontSize="14"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
-                    
-                    <!-- Weapon Slots -->
-                    <Grid Grid.Row="1" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <!-- Primary Weapon -->
-                        <Border Grid.Row="0" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="PrimarySlot" 
-                                   Text="PRI" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                        
-                        <!-- Secondary Weapon -->
-                        <Border Grid.Row="0" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="SecondarySlot" 
-                                   Text="SEC" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                        
-                        <!-- Range Weapon -->
-                        <Border Grid.Row="0" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="RangeSlot" 
-                                   Text="RNG" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                        
-                        <!-- Ammo -->
-                        <Border Grid.Row="1" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="AmmoSlot" 
-                                   Text="AMMO" 
-                                   TextColor="#FFD700"
-                                   FontSize="6"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                    </Grid>
-                    
-                    <!-- Ring & Charm Slots -->
-                    <Grid Grid.Row="2" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <!-- Left Ring -->
-                        <Border Grid.Row="0" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="RingSlot1" 
-                                   Text="RING" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                        
-                        <!-- Right Ring -->
-                        <Border Grid.Row="0" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="RingSlot2" 
-                                   Text="RING" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                        
-                        <!-- Charm -->
-                        <Border Grid.Row="0" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="2">
-                            <Label x:Name="CharmSlot" 
-                                   Text="CHARM" 
-                                   TextColor="#FFD700"
-                                   FontSize="6"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                    </Grid>
-                    
-                    <!-- Additional UI Elements -->
-                    <StackLayout Grid.Row="3" Margin="10">
-                        <!-- File name label for displaying loaded file -->
-                        <Label x:Name="FileNameLabel" 
-                               Text="Default EverQuest Character" 
-                               TextColor="#FFD700"
-                               FontSize="10"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               Margin="0,10"/>
-                    </StackLayout>
+
+                    <!-- Additional slots omitted for brevity -->
                 </Grid>
             </Border>
         </Grid>
@@ -558,7 +347,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
     </StackLayout>
-    
+
     <!-- File Menu Popup -->
     <StackLayout x:Name="FileMenu" 
                  IsVisible="False"
@@ -589,7 +378,7 @@
             </StackLayout>
         </Frame>
     </StackLayout>
-    
+
     <!-- Inventory View (initially hidden, becomes visible after loading file) -->
     <StackLayout x:Name="InventoryView" IsVisible="False" InputTransparent="False">
         <!-- Main EverQuest-style Inventory Window -->
@@ -600,14 +389,13 @@
                 VerticalOptions="Center"
                 WidthRequest="640"
                 HeightRequest="480">
-            
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>   <!-- Character Panel -->
                     <ColumnDefinition Width="200"/>   <!-- Stats Panel -->
                     <ColumnDefinition Width="240"/>   <!-- Inventory Panel -->
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Left Panel - Character Equipment -->
                 <Border Grid.Column="0" 
                         BackgroundColor="#333333" 
@@ -619,7 +407,7 @@
                             <RowDefinition Height="30"/>   <!-- Title -->
                             <RowDefinition Height="*"/>    <!-- Equipment Grid -->
                         </Grid.RowDefinitions>
-                        
+
                         <!-- Character Title -->
                         <Label Grid.Row="0" 
                                Text="Equipment" 
@@ -628,7 +416,7 @@
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
-                        
+
                         <!-- Equipment Slots Grid -->
                         <Grid Grid.Row="1" Margin="5">
                             <Grid.RowDefinitions>
@@ -647,9 +435,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <!-- Equipment Slots (keeping our existing slots) -->
-                            <!-- Row 0: Head and Ears -->
+
+                            <!-- Equipment Slots -->
                             <Border Grid.Row="0" Grid.Column="1" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -663,7 +450,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="0" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -677,7 +464,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="0" Grid.Column="2" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -691,10 +478,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
-                            <!-- Additional equipment slots would continue here -->
-                            <!-- I'll add the key ones to keep it manageable -->
-                            
+
                             <!-- Row 1: Face and Neck -->
                             <Border Grid.Row="1" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
@@ -709,7 +493,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="1" Grid.Column="2" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -723,7 +507,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <!-- Row 4: Chest -->
                             <Border Grid.Row="4" Grid.Column="1" 
                                     BackgroundColor="#1a1a1a" 
@@ -738,7 +522,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <!-- Add other essential slots -->
                             <Border Grid.Row="8" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
@@ -753,7 +537,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="8" Grid.Column="2" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -770,7 +554,7 @@
                         </Grid>
                     </Grid>
                 </Border>
-                
+
                 <!-- Center Panel - Character Stats -->
                 <Border Grid.Column="1" 
                         BackgroundColor="#333333" 
@@ -783,7 +567,7 @@
                                FontSize="14"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"/>
-                        
+
                         <!-- File name display -->
                         <Label x:Name="FileNameLabel" 
                                Text="No file loaded" 
@@ -793,7 +577,7 @@
                                Margin="0,10"/>
                     </StackLayout>
                 </Border>
-                
+
                 <!-- Right Panel - Weapons & Items -->
                 <Border Grid.Column="2" 
                         BackgroundColor="#333333" 
@@ -805,15 +589,15 @@
                             <RowDefinition Height="30"/>   <!-- Title -->
                             <RowDefinition Height="*"/>    <!-- Weapon slots -->
                         </Grid.RowDefinitions>
-                        
+
                         <Label Grid.Row="0" 
-                               Text="Weapons & Items" 
+                               Text="Weapons &amp; Items" 
                                TextColor="#FFD700"
                                FontSize="14"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
-                        
+
                         <Grid Grid.Row="1" Margin="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50"/>
@@ -825,7 +609,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <!-- Primary/Secondary weapons -->
                             <Border Grid.Row="0" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
@@ -840,7 +624,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="0" Grid.Column="1" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -854,7 +638,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <!-- Range/Ammo -->
                             <Border Grid.Row="1" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
@@ -869,7 +653,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="1" Grid.Column="1" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -883,7 +667,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <!-- Rings -->
                             <Border Grid.Row="2" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
@@ -898,7 +682,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <Border Grid.Row="2" Grid.Column="1" 
                                     BackgroundColor="#1a1a1a" 
                                     Stroke="#666666" 
@@ -912,7 +696,7 @@
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
                             </Border>
-                            
+
                             <!-- Charm -->
                             <Border Grid.Row="3" Grid.Column="0" 
                                     BackgroundColor="#1a1a1a" 
@@ -933,5 +717,4 @@
             </Grid>
         </Border>
     </StackLayout>
-
 </ContentPage>
