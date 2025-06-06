@@ -1,0 +1,176 @@
+            <!-- Right Panel - Inventory Grid -->
+            <Border Grid.Column="2" 
+                    BackgroundColor="#333333" 
+                    Stroke="#555555" 
+                    StrokeThickness="1"
+                    Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>   <!-- Title -->
+                        <RowDefinition Height="100"/>  <!-- Weapon Slots -->
+                        <RowDefinition Height="80"/>   <!-- Ring & Charm Slots -->
+                        <RowDefinition Height="*"/>    <!-- Additional Inventory -->
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Inventory Title -->
+                    <Label Grid.Row="0" 
+                           Text="Inventory" 
+                           TextColor="#FFD700"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    
+                    <!-- Weapon Slots -->
+                    <Grid Grid.Row="1" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Primary Weapon -->
+                        <Border Grid.Row="0" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="PrimarySlot" 
+                                   Text="PRI" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Secondary Weapon -->
+                        <Border Grid.Row="0" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="SecondarySlot" 
+                                   Text="SEC" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Range Weapon -->
+                        <Border Grid.Row="0" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="RangeSlot" 
+                                   Text="RNG" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Ammo -->
+                        <Border Grid.Row="1" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="AmmoSlot" 
+                                   Text="AMMO" 
+                                   TextColor="#FFD700"
+                                   FontSize="6"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                    </Grid>
+                    
+                    <!-- Ring & Charm Slots -->
+                    <Grid Grid.Row="2" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Left Ring -->
+                        <Border Grid.Row="0" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="RingSlot1" 
+                                   Text="RING" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Right Ring -->
+                        <Border Grid.Row="0" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="RingSlot2" 
+                                   Text="RING" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Charm -->
+                        <Border Grid.Row="0" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="2">
+                            <Label x:Name="CharmSlot" 
+                                   Text="CHARM" 
+                                   TextColor="#FFD700"
+                                   FontSize="6"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                    </Grid>
+                    
+                    <!-- Additional UI Elements -->
+                    <StackLayout Grid.Row="3" Margin="10">
+                        <!-- File name label for displaying loaded file -->
+                        <Label x:Name="FileNameLabel" 
+                               Text="Default EverQuest Character" 
+                               TextColor="#FFD700"
+                               FontSize="10"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               Margin="0,10"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
+    <!-- Hidden views for compatibility with existing code -->
+    <StackLayout x:Name="MainContent" IsVisible="False"/>
+    <StackLayout x:Name="InventoryView" IsVisible="True" InputTransparent="True"/>
+    <StackLayout x:Name="FileMenu" IsVisible="False"/>
+
+</ContentPage>
