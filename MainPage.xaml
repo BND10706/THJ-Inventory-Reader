@@ -34,402 +34,475 @@
                     Text="Use the File menu to open an inventory file"
                     FontSize="14"
                     HorizontalOptions="Center" />
-            </StackLayout>
-        </ScrollView>        <!-- Hidden File Menu -->
+            </StackLayout>        </ScrollView>
+        
+        <!-- Hidden File Menu -->
         <StackLayout x:Name="FileMenu" IsVisible="False" 
                      Grid.Row="1" 
                      BackgroundColor="White" 
                      Margin="10,0,0,0"
                      VerticalOptions="Start"
-                     HorizontalOptions="Start">
+                     HorizontalOptions="Start"
+                     ZIndex="1000">
             <Button Text="Open Inventory File" Clicked="OnOpenFileClicked" />
             <Button Text="Load Default Character" Clicked="OnLoadDefaultClicked" />
             <Button Text="Close" Clicked="OnCloseMenuClicked" />
-        </StackLayout><!-- EverQuest Character Sheet Display (Initially Hidden) -->
-        <ScrollView Grid.Row="1" x:Name="InventoryView" IsVisible="False">
+        </StackLayout>        <!-- EverQuest Character Sheet Display (Initially Hidden) -->
+        <ScrollView Grid.Row="1" x:Name="InventoryView" IsVisible="False" InputTransparent="True">
             <StackLayout Padding="20">
                 <Label x:Name="FileNameLabel" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
                 
-                <!-- EverQuest Authentic Character Sheet Layout -->
-                <Grid x:Name="CharacterSheetGrid" 
-                      BackgroundColor="#1a1a2e" 
-                      HorizontalOptions="Center" 
-                      VerticalOptions="Center"
-                      WidthRequest="500" 
-                      HeightRequest="450"
-                      Padding="15">
+                <!-- EverQuest Authentic Inventory Window (426x500 as per EQUI_Inventory.xml) -->
+                <Border BackgroundColor="#3a3a4a" 
+                        Stroke="#8B4513" 
+                        StrokeThickness="3"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center"
+                        WidthRequest="426" 
+                        HeightRequest="500"
+                        CornerRadius="8">
+                    <Border.Background>
+                        <ImageBrush ImageSource="background_dark.png" Stretch="Fill" />
+                    </Border.Background>
                     
-                    <!-- Background will go here when you provide the image -->
-                    <!-- <Image x:Name="CharacterSheetBackground" 
-                           Source="inventory_background.png" 
-                           Aspect="Fill" 
-                           HorizontalOptions="Fill" 
-                           VerticalOptions="Fill" /> -->
-                    
-                    <!-- Equipment slots positioned to match EverQuest layout exactly -->
-                    
-                    <!-- LEFT SIDE EQUIPMENT (Head to Feet) -->
-                    
-                    <!-- Head -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="20,20,0,0">
-                        <Label x:Name="HeadSlot" 
-                               Text="HEAD" 
-                               TextColor="White" 
-                               FontSize="8"
+                    <Grid x:Name="CharacterSheetGrid" 
+                          HorizontalOptions="Fill" 
+                          VerticalOptions="Fill"
+                          Padding="10">
+                        
+                        <!-- Title Bar Area -->
+                        <Label Text="Inventory" 
+                               FontSize="16" 
+                               FontAttributes="Bold"
+                               TextColor="#FFD700"
                                HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
+                               VerticalOptions="Start"
+                               Margin="0,5,0,0" />
+                          
+                        <!-- Character Equipment Area (centered within the 426x500 window) -->
+                        <Grid WidthRequest="420" 
+                              HeightRequest="370"
+                              HorizontalOptions="Center" 
+                              VerticalOptions="Center"
+                              Margin="0,30,0,0">
+                        
+                            <!-- Equipment slots positioned to match EverQuest layout exactly -->
+                              <!-- LEFT EAR (InvSlot1) -->
+                            <Border HorizontalOptions="Start" 
+                                    VerticalOptions="Start"
+                                    WidthRequest="42" 
+                                    HeightRequest="42"
+                                    Margin="123,12,0,0"
+                                    StrokeThickness="1"
+                                    Stroke="#8B4513">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                                </Border.Background>
+                                <Label x:Name="EarSlot1" 
+                                       Text="EAR" 
+                                       TextColor="#FFD700" 
+                                       FontSize="7"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+                            </Border>
 
-                    <!-- Neck -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
+                            <!-- HEAD (InvSlot2) -->
+                            <Border HorizontalOptions="Start" 
+                                    VerticalOptions="Start"
+                                    WidthRequest="42" 
+                                    HeightRequest="42"
+                                    Margin="166,12,0,0"
+                                    StrokeThickness="1"
+                                    Stroke="#8B4513">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                                </Border.Background>
+                                <Label x:Name="HeadSlot" 
+                                       Text="HEAD" 
+                                       TextColor="#FFD700" 
+                                       FontSize="7"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                            <!-- FACE (InvSlot3) -->
+                            <Border HorizontalOptions="Start" 
+                                    VerticalOptions="Start"
+                                    WidthRequest="42" 
+                                    HeightRequest="42"
+                                    Margin="210,12,0,0"
+                                    StrokeThickness="1"
+                                    Stroke="#8B4513">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                                </Border.Background>
+                                <Label x:Name="FaceSlot" 
+                                       Text="FACE" 
+                                       TextColor="#FFD700" 
+                                       FontSize="7"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                            <!-- RIGHT EAR (InvSlot4) -->
+                            <Border HorizontalOptions="Start" 
+                                    VerticalOptions="Start"
+                                    WidthRequest="42" 
+                                    HeightRequest="42"
+                                    Margin="253,12,0,0"
+                                    StrokeThickness="1"
+                                    Stroke="#8B4513">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                                </Border.Background>
+                                <Label x:Name="EarSlot2" 
+                                       Text="EAR" 
+                                       TextColor="#FFD700" 
+                                       FontSize="7"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                            <!-- CHEST (InvSlot17) -->
+                            <Border HorizontalOptions="Start" 
+                                    VerticalOptions="Start"
+                                    WidthRequest="42" 
+                                    HeightRequest="42"
+                                    Margin="123,55,0,0"
+                                    StrokeThickness="1"
+                                    Stroke="#8B4513">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                                </Border.Background>
+                                <Label x:Name="ChestSlot" 
+                                       Text="CHEST" 
+                                       TextColor="#FFD700" 
+                                       FontSize="6"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                    <!-- NECK (InvSlot5) -->
+                    <Border HorizontalOptions="Start" 
                             VerticalOptions="Start"
-                            Margin="20,70,0,0">
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="253,55,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
                         <Label x:Name="NeckSlot" 
                                Text="NECK" 
-                               TextColor="White" 
-                               FontSize="8"
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
                                HorizontalOptions="Center" 
                                VerticalOptions="Center" />
                     </Border>
 
-                    <!-- Shoulders -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
+                    <!-- BACK/ABOUT BODY (InvSlot8) -->
+                    <Border HorizontalOptions="Start" 
                             VerticalOptions="Start"
-                            Margin="20,120,0,0">
-                        <Label x:Name="ShoulderSlot" 
-                               Text="SHLD" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Chest -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="253,98,0,0"
                             StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="20,170,0,0">
-                        <Label x:Name="ChestSlot" 
-                               Text="CHEST" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Waist -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="20,220,0,0">
-                        <Label x:Name="WaistSlot" 
-                               Text="WAIST" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Legs -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="20,270,0,0">
-                        <Label x:Name="LegsSlot" 
-                               Text="LEGS" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Feet -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="20,320,0,0">
-                        <Label x:Name="FeetSlot" 
-                               Text="FEET" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- RIGHT SIDE EQUIPMENT -->
-                    
-                    <!-- Ear 1 -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,20,0,0">
-                        <Label x:Name="EarSlot1" 
-                               Text="EAR" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Ear 2 -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,70,0,0">
-                        <Label x:Name="EarSlot2" 
-                               Text="EAR" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Arms -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,120,0,0">
-                        <Label x:Name="ArmsSlot" 
-                               Text="ARMS" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Wrist 1 -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,170,0,0">
-                        <Label x:Name="WristSlot1" 
-                               Text="WRIST" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Wrist 2 -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,220,0,0">
-                        <Label x:Name="WristSlot2" 
-                               Text="WRIST" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Hands -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,270,0,0">
-                        <Label x:Name="HandsSlot" 
-                               Text="HANDS" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Ring 1 -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,320,0,0">
-                        <Label x:Name="RingSlot1" 
-                               Text="RING" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Ring 2 -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="270,370,0,0">
-                        <Label x:Name="RingSlot2" 
-                               Text="RING" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- BOTTOM WEAPONS AREA -->
-                    
-                    <!-- Primary Weapon -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="100,370,0,0">
-                        <Label x:Name="PrimarySlot" 
-                               Text="PRI" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Secondary Weapon -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="150,370,0,0">
-                        <Label x:Name="SecondarySlot" 
-                               Text="SEC" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Range -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="200,370,0,0">
-                        <Label x:Name="RangeSlot" 
-                               Text="RNG" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Ammo -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="320,320,0,0">
-                        <Label x:Name="AmmoSlot" 
-                               Text="AMMO" 
-                               TextColor="White" 
-                               FontSize="8"
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Border>
-
-                    <!-- Back (positioned behind character area) -->
-                    <Border BackgroundColor="#2a2a3e" 
-                            Stroke="#555" 
-                            StrokeThickness="1"
-                            WidthRequest="40" 
-                            HeightRequest="40"
-                            HorizontalOptions="Start" 
-                            VerticalOptions="Start"
-                            Margin="320,270,0,0">
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
                         <Label x:Name="BackSlot" 
                                Text="BACK" 
-                               TextColor="White" 
-                               FontSize="8"
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
                                HorizontalOptions="Center" 
                                VerticalOptions="Center" />
                     </Border>
 
-                    <!-- Character Model Area (center) -->
-                    <Border BackgroundColor="#1a1a2e" 
-                            Stroke="#666" 
-                            StrokeThickness="2"
-                            WidthRequest="120" 
-                            HeightRequest="200"
-                            HorizontalOptions="Start" 
+                    <!-- ARMS (InvSlot7) -->
+                    <Border HorizontalOptions="Start" 
                             VerticalOptions="Start"
-                            Margin="120,120,0,0">
-                        <Label Text="CHARACTER&#x0a;MODEL&#x0a;AREA" 
-                               TextColor="#888" 
-                               FontSize="10"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="123,99,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="ArmsSlot" 
+                               Text="ARMS" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
                                HorizontalOptions="Center" 
-                               VerticalOptions="Center" 
-                               HorizontalTextAlignment="Center" />
+                               VerticalOptions="Center" />
                     </Border>
+
+                    <!-- SHOULDERS (InvSlot6) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="253,141,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="ShoulderSlot" 
+                               Text="SHLD" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- WAIST (InvSlot20) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="123,142,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="WaistSlot" 
+                               Text="WAIST" 
+                               TextColor="#FFD700" 
+                               FontSize="6"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- LEFT WRIST (InvSlot9) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="123,185,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="WristSlot1" 
+                               Text="WRIST" 
+                               TextColor="#FFD700" 
+                               FontSize="6"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- RIGHT WRIST (InvSlot10) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="253,185,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="WristSlot2" 
+                               Text="WRIST" 
+                               TextColor="#FFD700" 
+                               FontSize="6"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- LEGS (InvSlot18) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="123,228,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="LegsSlot" 
+                               Text="LEGS" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- HANDS (InvSlot12) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="166,228,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="HandsSlot" 
+                               Text="HANDS" 
+                               TextColor="#FFD700" 
+                               FontSize="6"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- CHARM (InvSlot0) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="210,228,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="CharmSlot" 
+                               Text="CHARM" 
+                               TextColor="#FFD700" 
+                               FontSize="6"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- FEET (InvSlot19) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="253,228,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="FeetSlot" 
+                               Text="FEET" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- LEFT RING (InvSlot15) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="166,272,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="RingSlot1" 
+                               Text="RING" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- RIGHT RING (InvSlot16) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="210,272,0,0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="RingSlot2" 
+                               Text="RING" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- PRIMARY WEAPON (InvSlot13) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="123,316,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="PrimarySlot" 
+                               Text="PRI" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- SECONDARY WEAPON (InvSlot14) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="166,316,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="SecondarySlot" 
+                               Text="SEC" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- RANGE (InvSlot11) -->
+                    <Border HorizontalOptions="Start" 
+                            VerticalOptions="Start"
+                            WidthRequest="42" 
+                            HeightRequest="42"
+                            Margin="210,316,0,0"
+                            StrokeThickness="1"
+                            Stroke="#8B4513">
+                        <Border.Background>
+                            <ImageBrush ImageSource="slot_background.png" Stretch="Fill" />
+                        </Border.Background>
+                        <Label x:Name="RangeSlot" 
+                               Text="RNG" 
+                               TextColor="#FFD700" 
+                               FontSize="7"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
                 </Grid>
             </StackLayout>
         </ScrollView>

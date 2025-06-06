@@ -4,7 +4,7 @@ namespace THJ_Inventory_Reader;
 
 public partial class MainPage : ContentPage
 {
-	private Dictionary<string, Label> equipmentSlots;
+	private Dictionary<string, Label> equipmentSlots = new();
 
 	public MainPage()
 	{
@@ -12,12 +12,12 @@ public partial class MainPage : ContentPage
 		InitializeEquipmentSlots();
 		LoadDefaultInventory();
 	}
-
 	private void InitializeEquipmentSlots()
 	{
 		equipmentSlots = new Dictionary<string, Label>
 		{
 			{ "Head", HeadSlot },
+			{ "Face", FaceSlot },  // New Face slot
 			{ "Neck", NeckSlot },
 			{ "Ear", EarSlot1 },  // We'll handle multiple ears/rings specially
 			{ "Shoulders", ShoulderSlot },
@@ -30,44 +30,51 @@ public partial class MainPage : ContentPage
 			{ "Legs", LegsSlot },
 			{ "Feet", FeetSlot },
 			{ "Ring", RingSlot1 },  // We'll handle multiple rings specially
+			{ "Fingers", RingSlot1 },  // Handle "Fingers" as Ring alias from inventory files
 			{ "Primary", PrimarySlot },
 			{ "Secondary", SecondarySlot },
 			{ "Range", RangeSlot },
-			{ "Ammo", AmmoSlot }
+			{ "Ammo", AmmoSlot },
+			{ "Charm", CharmSlot }  // New Charm slot
 		};
 	}
-
 	private void OnFileMenuClicked(object? sender, EventArgs e)
 	{
+		Console.WriteLine("File menu clicked!");
+		System.Diagnostics.Debug.WriteLine("File menu clicked!");
 		FileMenu.IsVisible = !FileMenu.IsVisible;
+		Console.WriteLine($"File menu visibility set to: {FileMenu.IsVisible}");
 	}
-
-	private void OnCloseMenuClicked(object? sender, EventArgs e)
+	private async void OnCloseMenuClicked(object? sender, EventArgs e)
 	{
+		Console.WriteLine("Close menu clicked!");
+		System.Diagnostics.Debug.WriteLine("Close menu clicked!");
+		await DisplayAlert("Info", "Closing menu...", "OK");
 		FileMenu.IsVisible = false;
 	}
-
 	private async void OnOpenFileClicked(object? sender, EventArgs e)
 	{
+		Console.WriteLine("Open file clicked!");
+		System.Diagnostics.Debug.WriteLine("Open file clicked!");
 		try
 		{
-			var filePickerOptions = new PickOptions
-			{
-				PickerTitle = "Select Inventory File",
-				FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-				{
-					{ DevicePlatform.WinUI, new[] { ".txt" } },
-					{ DevicePlatform.macOS, new[] { "txt" } },
-					{ DevicePlatform.iOS, new[] { "public.text" } },
-					{ DevicePlatform.Android, new[] { "text/plain" } }
-				})
-			};
+			// Add debug feedback
+			await DisplayAlert("Info", "Opening file picker...", "OK");
 
-			var result = await FilePicker.PickAsync(filePickerOptions);
+			// Simplified file picker that should work better on macOS
+			var result = await FilePicker.PickAsync(new PickOptions
+			{
+				PickerTitle = "Select Inventory File"
+			});
+
 			if (result != null)
 			{
 				await LoadInventoryFile(result);
 				FileMenu.IsVisible = false;
+			}
+			else
+			{
+				await DisplayAlert("Info", "No file selected", "OK");
 			}
 		}
 		catch (Exception ex)
@@ -81,12 +88,11 @@ public partial class MainPage : ContentPage
 		try
 		{
 			var content = await File.ReadAllTextAsync(file.FullPath);
-			ParseInventoryData(content);
-
-			// Update UI
+			ParseInventoryData(content);            // Update UI
 			FileNameLabel.Text = $"File: {file.FileName}";
 			MainContent.IsVisible = false;
 			InventoryView.IsVisible = true;
+			InventoryView.InputTransparent = false;
 		}
 		catch (Exception ex)
 		{
@@ -147,7 +153,7 @@ public partial class MainPage : ContentPage
 							SetEquipmentSlot("Wrist", itemName, WristSlot2);
 						wristCount++;
 					}
-					else if (location == "Ring")
+					else if (location == "Ring" || location == "Fingers")
 					{
 						if (ringCount == 0)
 							SetEquipmentSlot("Ring", itemName, RingSlot1);
@@ -163,7 +169,6 @@ public partial class MainPage : ContentPage
 			}
 		}
 	}
-
 	private void ClearEquipmentSlots()
 	{
 		foreach (var slot in equipmentSlots.Values)
@@ -174,11 +179,11 @@ public partial class MainPage : ContentPage
 		}
 
 		// Clear additional slots
-		EarSlot2.Text = "Ear";
+		EarSlot2.Text = "EAR";
 		EarSlot2.TextColor = Colors.White;
-		WristSlot2.Text = "Wrist";
+		WristSlot2.Text = "WRIST";
 		WristSlot2.TextColor = Colors.White;
-		RingSlot2.Text = "Ring";
+		RingSlot2.Text = "RING";
 		RingSlot2.TextColor = Colors.White;
 	}
 
@@ -194,35 +199,37 @@ public partial class MainPage : ContentPage
 			targetSlot.FontSize = 9;
 		}
 	}
-
 	private string GetSlotDefaultText(Label slot)
 	{
-		if (slot == HeadSlot) return "Head";
-		if (slot == NeckSlot) return "Neck";
-		if (slot == EarSlot1) return "Ear";
-		if (slot == ShoulderSlot) return "Shoulders";
-		if (slot == ArmsSlot) return "Arms";
-		if (slot == WristSlot1) return "Wrist";
-		if (slot == HandsSlot) return "Hands";
-		if (slot == ChestSlot) return "Chest";
-		if (slot == BackSlot) return "Back";
-		if (slot == WaistSlot) return "Waist";
-		if (slot == LegsSlot) return "Legs";
-		if (slot == FeetSlot) return "Feet";
-		if (slot == RingSlot1) return "Ring";
-		if (slot == PrimarySlot) return "Primary";
-		if (slot == SecondarySlot) return "Secondary";
-		if (slot == RangeSlot) return "Range";
-		if (slot == AmmoSlot) return "Ammo";
+		if (slot == HeadSlot) return "HEAD";
+		if (slot == FaceSlot) return "FACE";
+		if (slot == NeckSlot) return "NECK";
+		if (slot == EarSlot1) return "EAR";
+		if (slot == ShoulderSlot) return "SHLD";
+		if (slot == ArmsSlot) return "ARMS";
+		if (slot == WristSlot1) return "WRIST";
+		if (slot == HandsSlot) return "HANDS";
+		if (slot == ChestSlot) return "CHEST";
+		if (slot == BackSlot) return "BACK";
+		if (slot == WaistSlot) return "WAIST";
+		if (slot == LegsSlot) return "LEGS";
+		if (slot == FeetSlot) return "FEET";
+		if (slot == RingSlot1) return "RING";
+		if (slot == PrimarySlot) return "PRI";
+		if (slot == SecondarySlot) return "SEC";
+		if (slot == RangeSlot) return "RNG";
+		if (slot == AmmoSlot) return "AMMO";
+		if (slot == CharmSlot) return "CHARM";
 		return "Empty";
 	}
 	private void LoadDefaultInventory()
 	{
 		try
-		{
-			// Create a default inventory with sample EverQuest items
+		{           // Create a default inventory with sample EverQuest items
 			var defaultInventoryData = @"Location	Name	ID	Count	Slots
+Charm	Intricate Wooden Figurine	12034	1	6
 Head	Crown of the Froglok King	12034	1	8
+Face	Mask of the Ancients	19041	1	8
 Neck	Necklace of Superiority	5521	1	0
 Ear	Black Sapphire Electrum Earring	14761	1	8
 Ear	Earring of the Solstice	19041	1	8
@@ -243,12 +250,11 @@ Secondary	Shield of the Righteous	15678	1	0
 Range	Elvish Longbow	8901	1	0
 Ammo	Platinum Tipped Arrow	234	200	0";
 
-			ParseInventoryData(defaultInventoryData);
-
-			// Update UI to show character sheet
+			ParseInventoryData(defaultInventoryData);           // Update UI to show character sheet
 			FileNameLabel.Text = "Default EverQuest Character";
 			MainContent.IsVisible = false;
 			InventoryView.IsVisible = true;
+			InventoryView.InputTransparent = false;
 		}
 		catch (Exception ex)
 		{
@@ -256,9 +262,19 @@ Ammo	Platinum Tipped Arrow	234	200	0";
 			System.Diagnostics.Debug.WriteLine($"Failed to load default inventory: {ex.Message}");
 		}
 	}
-	private void OnLoadDefaultClicked(object? sender, EventArgs e)
+	private async void OnLoadDefaultClicked(object? sender, EventArgs e)
 	{
-		LoadDefaultInventory();
-		FileMenu.IsVisible = false;
+		Console.WriteLine("Load default clicked!");
+		System.Diagnostics.Debug.WriteLine("Load default clicked!");
+		try
+		{
+			await DisplayAlert("Info", "Loading default character...", "OK");
+			LoadDefaultInventory();
+			FileMenu.IsVisible = false;
+		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Error", $"Failed to load default character: {ex.Message}", "OK");
+		}
 	}
 }
