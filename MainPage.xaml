@@ -1,363 +1,1007 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:THJ_Inventory_Reader.Converters"
              x:Class="THJ_Inventory_Reader.MainPage"
-             Title="THJ Inventory Reader"
+             Title="THJ Inventory Reader - EverQuest Style"
              BackgroundColor="#1a1a1a">
+    
+    <ContentPage.Resources>
+        <local:GreaterThanOneConverter x:Key="GreaterThanOneConverter" />
+    </ContentPage.Resources>
 
-    <!-- Main EverQuest-style Inventory Window -->
-    <Border BackgroundColor="#2a2a2a" 
-            Stroke="#6B4423" 
-            StrokeThickness="3"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            WidthRequest="640"
-            HeightRequest="480">
-        <Grid Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>   <!-- Character Panel -->
-                <ColumnDefinition Width="200"/>   <!-- Stats Panel -->
-                <ColumnDefinition Width="240"/>   <!-- Inventory Panel -->
-            </Grid.ColumnDefinitions>
-
-            <!-- Left Panel - Character Equipment -->
-            <Border Grid.Column="0" 
-                    BackgroundColor="#333333" 
-                    Stroke="#555555" 
-                    StrokeThickness="1"
-                    Margin="5">
-                <Grid>
+    <!-- Main Content Grid -->
+    <Grid>
+        <!-- Main Menu Interface (shown at app start) -->
+        <Grid x:Name="MainContent" BackgroundColor="#1a1a1a">
+            <Border BackgroundColor="#4a3f2e" 
+                    Stroke="#8B7355" 
+                    StrokeThickness="4"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="320"
+                    HeightRequest="240"
+                    Shadow="{BoxShadow Color=#40000000, Offset='0,4'}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                
+                <Grid Padding="15">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>   <!-- Title -->
-                        <RowDefinition Height="*"/>    <!-- Equipment Grid -->
+                        <RowDefinition Height="Auto"/>  <!-- Title -->
+                        <RowDefinition Height="*"/>     <!-- Content -->
                     </Grid.RowDefinitions>
-
-                    <!-- Character Title -->
-                    <Label Grid.Row="0" 
-                           Text="Equipment" 
+                    
+                    <!-- Title -->
+                    <Label Text="THJ EverQuest Inventory Reader" 
                            TextColor="#FFD700"
-                           FontSize="14"
+                           FontSize="18"
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-
-                    <!-- Equipment Slots Grid -->
-                    <Grid Grid.Row="1" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>  <!-- Head, Ears -->
-                            <RowDefinition Height="35"/>  <!-- Face, Neck -->
-                            <RowDefinition Height="35"/>  <!-- Shoulders -->
-                            <RowDefinition Height="35"/>  <!-- Arms, Back -->
-                            <RowDefinition Height="35"/>  <!-- Chest -->
-                            <RowDefinition Height="35"/>  <!-- Wrists -->
-                            <RowDefinition Height="35"/>  <!-- Waist -->
-                            <RowDefinition Height="35"/>  <!-- Legs -->
-                            <RowDefinition Height="35"/>  <!-- Hands, Feet -->
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Equipment Slots -->
-                        <Border Grid.Row="0" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="HeadSlot" 
-                                   Text="HEAD" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Border Grid.Row="0" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="EarSlot1" 
-                                   Text="EAR" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Border Grid.Row="0" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="EarSlot2" 
-                                   Text="EAR" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 1: Face and Neck -->
-                        <Border Grid.Row="1" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="FaceSlot" 
-                                   Text="FACE" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Border Grid.Row="1" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="NeckSlot" 
-                                   Text="NECK" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 2: Shoulders -->
-                        <Border Grid.Row="2" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="ShoulderSlot" 
-                                   Text="SHLD" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 3: Arms and Back -->
-                        <Border Grid.Row="3" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="ArmsSlot" 
-                                   Text="ARMS" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Border Grid.Row="3" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="BackSlot" 
-                                   Text="BACK" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 4: Chest -->
-                        <Border Grid.Row="4" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="ChestSlot" 
-                                   Text="CHEST" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 5: Wrists -->
-                        <Border Grid.Row="5" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="WristSlot1" 
-                                   Text="WRIST" 
-                                   TextColor="#FFD700"
-                                   FontSize="6"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Border Grid.Row="5" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="WristSlot2" 
-                                   Text="WRIST" 
-                                   TextColor="#FFD700"
-                                   FontSize="6"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 6: Waist -->
-                        <Border Grid.Row="6" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="WaistSlot" 
-                                   Text="WAIST" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 7: Legs -->
-                        <Border Grid.Row="7" Grid.Column="1" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="LegsSlot" 
-                                   Text="LEGS" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <!-- Row 8: Hands and Feet -->
-                        <Border Grid.Row="8" Grid.Column="0" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="HandsSlot" 
-                                   Text="HANDS" 
-                                   TextColor="#FFD700"
-                                   FontSize="6"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Border Grid.Row="8" Grid.Column="2" 
-                                BackgroundColor="#1a1a1a" 
-                                Stroke="#666666" 
-                                StrokeThickness="1"
-                                Margin="1">
-                            <Label x:Name="FeetSlot" 
-                                   Text="FEET" 
-                                   TextColor="#FFD700"
-                                   FontSize="7"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-                    </Grid>
+                           HorizontalOptions="Center" 
+                           Grid.Row="0" 
+                           Margin="0,0,0,20"/>
+                    
+                    <!-- Buttons -->
+                    <StackLayout Grid.Row="1" Spacing="15" VerticalOptions="Center">
+                        <Button Text="Open Inventory File" 
+                                BackgroundColor="#59483a"
+                                TextColor="#FFD700"
+                                FontAttributes="Bold"
+                                Clicked="OnOpenFileClicked"
+                                HeightRequest="40"
+                                CornerRadius="6"/>
+                        
+                        <Button Text="Load Default Inventory" 
+                                BackgroundColor="#59483a"
+                                TextColor="#FFD700"
+                                FontAttributes="Bold"
+                                Clicked="OnLoadDefaultClicked"
+                                HeightRequest="40"
+                                CornerRadius="6"/>
+                        
+                        <Button Text="Exit" 
+                                BackgroundColor="#59483a"
+                                TextColor="#FFD700"
+                                FontAttributes="Bold"
+                                Clicked="OnExitClicked"
+                                HeightRequest="40"
+                                CornerRadius="6"/>
+                    </StackLayout>
                 </Grid>
             </Border>
-
-            <!-- Center Panel - Character Stats -->
-            <Border Grid.Column="1" 
-                    BackgroundColor="#333333" 
-                    Stroke="#555555" 
-                    StrokeThickness="1"
-                    Margin="5">
-                <StackLayout Margin="10">
-                    <Label Text="Character Stats" 
+        </Grid>
+        
+        <!-- Inventory Window (hidden at start) -->
+        <Grid x:Name="InventoryView" IsVisible="false" InputTransparent="true">
+            <!-- Main window with light rock texture background (wnd_bg_light_rock.tga) -->
+            <Border BackgroundColor="#4a3f2e" 
+                    Stroke="#8B7355" 
+                    StrokeThickness="5"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="426"
+                    HeightRequest="500"
+                    Shadow="{BoxShadow Color=#40000000, Offset='0,4'}">
+                
+                <!-- Rounded corners to simulate FiligreeFrame border from window_pieces05.tga -->
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+            
+            <!-- Titlebar - simulate A_FiligreeFrameWithTitleTop -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22"/>  <!-- Titlebar height -->
+                    <RowDefinition Height="*"/>   <!-- Main content -->
+                </Grid.RowDefinitions>
+                
+                <!-- Title Bar with gradient to simulate FiligreeFrameTitle -->
+                <Border Grid.Row="0" 
+                        BackgroundColor="#645342" 
+                        Stroke="#8B7355" 
+                        StrokeThickness="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8,8,0,0"/>
+                    </Border.StrokeShape>
+                </Border>
+                
+                <!-- Window Title -->
+                <Grid Grid.Row="0">
+                    <Label Text="Inventory" 
                            TextColor="#FFD700"
-                           FontSize="14"
+                           FontSize="16"
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
-
-                    <!-- File name display -->
-                    <Label x:Name="FileNameLabel" 
-                           Text="No file loaded" 
-                           TextColor="#FFD700"
-                           FontSize="10"
                            HorizontalOptions="Center"
-                           Margin="0,10"/>
-                </StackLayout>
-            </Border>
-
-            <!-- Right Panel - Weapons & Items -->
-            <Border Grid.Column="2" 
-                    BackgroundColor="#333333" 
-                    Stroke="#555555" 
-                    StrokeThickness="1"
-                    Margin="5">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>   <!-- Title -->
-                        <RowDefinition Height="*"/>    <!-- Weapon slots -->
-                    </Grid.RowDefinitions>
-
-                    <Label Grid.Row="0" 
-                           Text="Weapons &amp; Items" 
-                           TextColor="#FFD700"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-
-                    <!-- Additional slots omitted for brevity -->
+                           VerticalOptions="Center"
+                           Margin="0,1,0,0"/>
+                    
+                    <!-- Close Button - simulates A_CloseBtnNormal from window_pieces01.tga -->
+                    <Button BackgroundColor="Transparent"
+                            TextColor="#FFD700"
+                            Text="✕"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Margin="0,0,8,0"
+                            Clicked="OnCloseButtonClicked"
+                            WidthRequest="22"
+                            HeightRequest="22"
+                            Padding="0">
+                        <Button.Shadow>
+                            <Shadow Brush="#40000000"
+                                    Offset="0,0"
+                                    Radius="0"/>
+                        </Button.Shadow>
+                    </Button>
+                </Grid>
+                
+                <!-- Main Content with rock texture background simulation -->
+                <Grid Grid.Row="1" BackgroundColor="#4a3f2e">
+                    <!-- TabBox section simulating IW_Subwindows in original EQ -->
+                    <TabView Grid.Row="1" Margin="3" BackgroundColor="#4a3f2e">
+                        <TabView.TabStripPlacement>Top</TabView.TabStripPlacement>
+                        <TabView.TabStripBackgroundColor>#59483a</TabView.TabStripBackgroundColor>
+                        <TabView.TabStripHeight>28</TabView.TabStripHeight>
+                        <TabView.TabContentBackgroundColor>#4a3f2e</TabView.TabContentBackgroundColor>
+                        
+                        <!-- Inventory Tab (IW_InvPage) -->
+                        <TabItem Text="Inventory" TextColor="#FFD700">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="125"/>   <!-- Character Panel -->
+                                        <ColumnDefinition Width="*"/>     <!-- Inventory Panel -->
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Equipment Panel -->
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>  <!-- Title -->
+                                            <RowDefinition Height="*"/>     <!-- Equipment Slots -->
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Equipment Title -->
+                                        <Label Grid.Row="0" 
+                                               Text="Equipment" 
+                                               TextColor="#FFD700"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Center"
+                                               Margin="0,4,0,8"/>
+                                        
+                                        <!-- Equipment Slots Grid -->
+                                        <Grid Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="46"/>  <!-- Head Row: Ear, Head, Face, Ear -->
+                                                <RowDefinition Height="4"/>   <!-- Divider -->
+                                                <RowDefinition Height="46"/>  <!-- Neck, Shoulders -->
+                                                <RowDefinition Height="4"/>   <!-- Divider -->
+                                                <RowDefinition Height="46"/>  <!-- Arms, Back -->
+                                                <RowDefinition Height="46"/>  <!-- Chest, Waist -->
+                                                <RowDefinition Height="4"/>   <!-- Divider -->
+                                                <RowDefinition Height="46"/>  <!-- Wrist, Wrist -->
+                                                <RowDefinition Height="4"/>   <!-- Divider -->
+                                                <RowDefinition Height="46"/>  <!-- Hands, Legs, Feet -->
+                                                <RowDefinition Height="4"/>   <!-- Divider -->
+                                                <RowDefinition Height="46"/>  <!-- Primary, Secondary -->
+                                                <RowDefinition Height="46"/>  <!-- Range, Ammo -->
+                                                <RowDefinition Height="4"/>   <!-- Divider -->
+                                                <RowDefinition Height="46"/>  <!-- Rings -->
+                                                <RowDefinition Height="46"/>  <!-- Charm -->
+                                            </Grid.RowDefinitions>
+                                            
+                                            <!-- Dividers (simulation of A_DividerMiddle) -->
+                                            <BoxView Grid.Row="1" BackgroundColor="#8B7355" HeightRequest="2" Margin="1,1,1,1"/>
+                                            <BoxView Grid.Row="3" BackgroundColor="#8B7355" HeightRequest="2" Margin="1,1,1,1"/>
+                                            <BoxView Grid.Row="6" BackgroundColor="#8B7355" HeightRequest="2" Margin="1,1,1,1"/>
+                                            <BoxView Grid.Row="8" BackgroundColor="#8B7355" HeightRequest="2" Margin="1,1,1,1"/>
+                                            <BoxView Grid.Row="10" BackgroundColor="#8B7355" HeightRequest="2" Margin="1,1,1,1"/>
+                                            <BoxView Grid.Row="13" BackgroundColor="#8B7355" HeightRequest="2" Margin="1,1,1,1"/>
+                                            
+                                            <!-- Equipment Slots - Head Row -->
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Left Ear -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="EarSlot1" 
+                                                           Text="EAR" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Head -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="HeadSlot" 
+                                                           Text="HEAD" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Face -->
+                                                <Border Grid.Column="2" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="FaceSlot" 
+                                                           Text="FACE" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Neck, Shoulders Row -->
+                                            <Grid Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Right Ear -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="EarSlot2" 
+                                                           Text="EAR" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Neck -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="NeckSlot" 
+                                                           Text="NECK" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Shoulders -->
+                                                <Border Grid.Column="2" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="ShoulderSlot" 
+                                                           Text="SHLDR" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Arms, Back Row -->
+                                            <Grid Grid.Row="4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Arms -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="ArmsSlot" 
+                                                           Text="ARMS" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Back -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="BackSlot" 
+                                                           Text="BACK" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Chest, Waist Row -->
+                                            <Grid Grid.Row="5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Chest -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="ChestSlot" 
+                                                           Text="CHEST" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Waist -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="WaistSlot" 
+                                                           Text="WAIST" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Wrists Row -->
+                                            <Grid Grid.Row="7">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Left Wrist -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="WristSlot1" 
+                                                           Text="WRIST" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Right Wrist -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="WristSlot2" 
+                                                           Text="WRIST" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Hands, Legs, Feet Row -->
+                                            <Grid Grid.Row="9">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Hands -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="HandsSlot" 
+                                                           Text="HANDS" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Legs -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="LegsSlot" 
+                                                           Text="LEGS" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Feet -->
+                                                <Border Grid.Column="2" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="FeetSlot" 
+                                                           Text="FEET" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Primary, Secondary Weapons -->
+                                            <Grid Grid.Row="11">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Primary -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="PrimarySlot" 
+                                                           Text="PRIMARY" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Secondary -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="SecondarySlot" 
+                                                           Text="SECONDARY" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Range, Ammo -->
+                                            <Grid Grid.Row="12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Range -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="RangeSlot" 
+                                                           Text="RANGE" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Ammo -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="AmmoSlot" 
+                                                           Text="AMMO" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Rings -->
+                                            <Grid Grid.Row="14">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Ring 1 -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="RingSlot1" 
+                                                           Text="RING" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                                
+                                                <!-- Ring 2 -->
+                                                <Border Grid.Column="1" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="RingSlot2" 
+                                                           Text="RING" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                            
+                                            <!-- Charm -->
+                                            <Grid Grid.Row="15">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Charm -->
+                                                <Border Grid.Column="0" 
+                                                        BackgroundColor="#2a231c" 
+                                                        Stroke="#594a38" 
+                                                        StrokeThickness="2"
+                                                        Margin="2,2,2,2"
+                                                        HorizontalOptions="Center"
+                                                        WidthRequest="60">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="4"/>
+                                                    </Border.StrokeShape>
+                                                    <Label x:Name="CharmSlot" 
+                                                           Text="CHARM" 
+                                                           TextColor="#FFD700"
+                                                           FontSize="8"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"/>
+                                                </Border>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    
+                                    <!-- Inventory Grid (right side) -->
+                                    <Grid Grid.Column="1" Padding="5,0,0,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>   <!-- File info -->
+                                            <RowDefinition Height="*"/>      <!-- Inventory items -->
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Filename display with authentic EQ style border -->
+                                        <Border Grid.Row="0"
+                                                BackgroundColor="#2a231c" 
+                                                Stroke="#594a38" 
+                                                StrokeThickness="1"
+                                                Margin="2,2,2,8">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="2"/>
+                                            </Border.StrokeShape>
+                                            <Label x:Name="FileNameLabel2"
+                                                   Text="File: No file loaded" 
+                                                   TextColor="#FFD700"
+                                                   FontSize="12" 
+                                                   Margin="5,3,5,3"
+                                                   HorizontalOptions="Start"/>
+                                        </Border>
+                                        
+                                        <!-- Inventory Items Display - simulating inventory slots -->
+                                        <ScrollView Grid.Row="1">
+                                            <CollectionView x:Name="InventoryItemsView" 
+                                                           SelectionMode="Single"
+                                                           EmptyView="No inventory items">
+                                                <CollectionView.ItemsLayout>
+                                                    <GridItemsLayout Orientation="Vertical" 
+                                                                     Span="5"
+                                                                     HorizontalItemSpacing="6"
+                                                                     VerticalItemSpacing="6"/>
+                                                </CollectionView.ItemsLayout>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <!-- Inventory Slot Styling - similar to actual EQ slots -->
+                                                        <Border BackgroundColor="#2a231c" 
+                                                                Stroke="#594a38" 
+                                                                StrokeThickness="2"
+                                                                HeightRequest="42"
+                                                                WidthRequest="42">
+                                                            <Border.StrokeShape>
+                                                                <RoundRectangle CornerRadius="4"/>
+                                                            </Border.StrokeShape>
+                                                            <Grid RowSpacing="0" Padding="2">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="*"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
+                                                                
+                                                                <!-- Item display area -->
+                                                                <Border Grid.Row="0" 
+                                                                        BackgroundColor="#1a150f" 
+                                                                        Stroke="#463a2e" 
+                                                                        StrokeThickness="1"
+                                                                        HorizontalOptions="Fill"
+                                                                        VerticalOptions="Fill"
+                                                                        Margin="1">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2"/>
+                                                                    </Border.StrokeShape>
+                                                                    <!-- Item name display (in a tooltip on hover in full EQ) -->
+                                                                    <Label Text="{Binding Name}" 
+                                                                           TextColor="#FFD700"
+                                                                           FontSize="8" 
+                                                                           HorizontalOptions="Center"
+                                                                           VerticalOptions="Center"
+                                                                           LineBreakMode="WordWrap"/>
+                                                                </Border>
+                                                                
+                                                                <!-- Item count (if stacked) -->
+                                                                <Label Text="{Binding Count}" 
+                                                                       Grid.Row="1"
+                                                                       IsVisible="{Binding Count, Converter={StaticResource GreaterThanOneConverter}}"
+                                                                       TextColor="White" 
+                                                                       FontSize="8" 
+                                                                       HorizontalOptions="End"
+                                                                       VerticalOptions="End"
+                                                                       Margin="0,2,2,0"/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        
+                        <!-- Stats Tab (IW_StatPage) -->
+                        <TabItem Text="Stats" TextColor="#FFD700">
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/> <!-- Section header -->
+                                    <RowDefinition Height="*"/> <!-- Stats content -->
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Section Title -->
+                                <Label Grid.Row="0" 
+                                       Text="Character Statistics" 
+                                       TextColor="#FFD700"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       Margin="0,5,0,10"/>
+                                
+                                <!-- Stats Panel with authentic EQ styling -->
+                                <ScrollView Grid.Row="1" BackgroundColor="#2a231c">
+                                    <Grid Padding="8" RowSpacing="6">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!-- Stat Labels and Values -->
+                                        <Label Grid.Row="0" Grid.Column="0" Text="STR:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="0" Grid.Column="1" x:Name="StatSTR" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="1" Grid.Column="0" Text="STA:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Grid.Column="1" x:Name="StatSTA" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="2" Grid.Column="0" Text="AGI:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Grid.Column="1" x:Name="StatAGI" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="3" Grid.Column="0" Text="DEX:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="3" Grid.Column="1" x:Name="StatDEX" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="4" Grid.Column="0" Text="WIS:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="4" Grid.Column="1" x:Name="StatWIS" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="5" Grid.Column="0" Text="INT:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="5" Grid.Column="1" x:Name="StatINT" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="6" Grid.Column="0" Text="CHA:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="6" Grid.Column="1" x:Name="StatCHA" Text="0" TextColor="White" FontSize="14"/>
+                                        
+                                        <!-- Divider with authentic EQ styling -->
+                                        <BoxView Grid.Row="7" Grid.ColumnSpan="2" BackgroundColor="#8B7355" HeightRequest="2" Margin="0,5,0,5"/>
+                                        
+                                        <Label Grid.Row="8" Grid.Column="0" Text="HP:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="8" Grid.Column="1" x:Name="StatHP" Text="0/0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="9" Grid.Column="0" Text="MANA:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="9" Grid.Column="1" x:Name="StatMANA" Text="0/0" TextColor="White" FontSize="14"/>
+                                        
+                                        <Label Grid.Row="10" Grid.Column="0" Text="ENDUR:" TextColor="#FFD700" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="10" Grid.Column="1" x:Name="StatENDUR" Text="0/0" TextColor="White" FontSize="14"/>
+                                    </Grid>
+                                </ScrollView>
+                            </Grid>
+                        </TabItem>
+                        
+                        <!-- Alt Currency Tab (IW_AltCurrPage) -->
+                        <TabItem Text="Alt. Currency" TextColor="#FFD700">
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/> <!-- Section header -->
+                                    <RowDefinition Height="*"/> <!-- Currency list -->
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Section Title -->
+                                <Label Grid.Row="0" 
+                                       Text="Alternative Currency" 
+                                       TextColor="#FFD700"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       Margin="0,5,0,10"/>
+                                
+                                <!-- Currency List with authentic EQ styling -->
+                                <ListView Grid.Row="1" 
+                                          x:Name="AltCurrencyListView"
+                                          BackgroundColor="#2a231c"
+                                          SeparatorColor="#594a38">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Grid Padding="5" ColumnSpacing="10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <Label Grid.Column="0" 
+                                                           Text="{Binding Name}"
+                                                           TextColor="White"
+                                                           FontSize="14"/>
+                                                    
+                                                    <Label Grid.Column="1" 
+                                                           Text="{Binding Amount}"
+                                                           TextColor="#FFD700"
+                                                           FontSize="14"
+                                                           FontAttributes="Bold"/>
+                                                </Grid>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
+                        </TabItem>
+                    </TabView>
                 </Grid>
             </Border>
         </Grid>
     </Border>
 
-    <!-- Menu overlay structure for file operations -->
-    <StackLayout x:Name="MainContent" 
-                 IsVisible="True" 
-                 BackgroundColor="Transparent"
-                 HorizontalOptions="Fill" 
-                 VerticalOptions="Fill">
-        <Button Text="📁 Open Inventory File" 
-                Clicked="OnFileMenuClicked"
-                BackgroundColor="#6B4423"
-                TextColor="#FFD700"
-                FontSize="16"
-                FontAttributes="Bold"
-                Margin="20"
+    <!-- Menu overlay structure for file operations - styled like an EQ Dialog -->
+    <Grid x:Name="MainContent" 
+          IsVisible="True" 
+          BackgroundColor="#1a1a1a"
+          HorizontalOptions="Fill" 
+          VerticalOptions="Fill">
+        
+        <Border BackgroundColor="#4a3f2e" 
+                Stroke="#8B7355" 
+                StrokeThickness="4"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"/>
-    </StackLayout>
+                VerticalOptions="Center"
+                WidthRequest="320"
+                HeightRequest="240"
+                Shadow="{BoxShadow Color=#40000000, Offset='0,4'}">
+            
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22"/>  <!-- Titlebar height -->
+                    <RowDefinition Height="*"/>   <!-- Main content -->
+                </Grid.RowDefinitions>
+                
+                <!-- Title Bar -->
+                <Border Grid.Row="0" 
+                        BackgroundColor="#645342" 
+                        Stroke="#8B7355" 
+                        StrokeThickness="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8,8,0,0"/>
+                    </Border.StrokeShape>
+                </Border>
+                
+                <Label Grid.Row="0"
+                       Text="THJ Inventory Reader" 
+                       TextColor="#FFD700"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                
+                <!-- Main Content -->
+                <StackLayout Grid.Row="1" 
+                             BackgroundColor="#33291f"
+                             Padding="20"
+                             VerticalOptions="Center">
+                    <Label Text="EverQuest Character Inventory Viewer" 
+                           TextColor="#FFD700" 
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,20"/>
+                           
+                    <Button Text="📁 Open Inventory File" 
+                            Clicked="OnOpenFileClicked"
+                            BackgroundColor="#59483a"
+                            TextColor="#FFD700"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            CornerRadius="6"
+                            Margin="20,5"/>
+                            
+                    <Button Text="📋 Load Default Sample" 
+                            Clicked="OnLoadDefaultClicked"
+                            BackgroundColor="#59483a"
+                            TextColor="#FFD700"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            CornerRadius="6"
+                            Margin="20,5"/>
+                </StackLayout>
+            </Grid>
+        </Border>
+    </Grid>
 
-    <!-- File Menu Popup -->
+    <!-- File Menu Popup - Not needed with direct open functionality -->
     <StackLayout x:Name="FileMenu" 
                  IsVisible="False"
                  BackgroundColor="#2a2a2a"
+                 Opacity="0.9"
                  HorizontalOptions="Center"
                  VerticalOptions="Center"
                  Margin="50">
-        <Frame BackgroundColor="#333333" 
-               BorderColor="#6B4423" 
-               Padding="20">
+        <Border BackgroundColor="#4a3f2e" 
+                Stroke="#8B7355" 
+                StrokeThickness="3"
+                Padding="20">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
             <StackLayout>
                 <Label Text="File Operations" 
                        TextColor="#FFD700" 
@@ -367,20 +1011,23 @@
                        Margin="0,0,0,10"/>
                 <Button Text="Open File" 
                         Clicked="OnOpenFileClicked"
-                        BackgroundColor="#6B4423"
+                        BackgroundColor="#59483a"
                         TextColor="#FFD700"
-                        Margin="5"/>
+                        Margin="5"
+                        CornerRadius="4"/>
                 <Button Text="Close Menu" 
                         Clicked="OnCloseMenuClicked"
-                        BackgroundColor="#666666"
+                        BackgroundColor="#59483a"
                         TextColor="#FFD700"
-                        Margin="5"/>
+                        Margin="5"
+                        CornerRadius="4"/>
             </StackLayout>
-        </Frame>
+        </Border>
     </StackLayout>
 
     <!-- Inventory View (initially hidden, becomes visible after loading file) -->
-    <StackLayout x:Name="InventoryView" IsVisible="False" InputTransparent="False">
+    <Grid x:Name="InventoryView" IsVisible="False" InputTransparent="False" 
+          BackgroundColor="#1a1a1a">
         <!-- Main EverQuest-style Inventory Window -->
         <Border BackgroundColor="#2a2a2a" 
                 Stroke="#6B4423" 
@@ -442,7 +1089,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="HeadSlot" 
+                                <Label x:Name="HeadSlot2" 
                                        Text="HEAD" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -456,7 +1103,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="EarSlot1" 
+                                <Label x:Name="EarSlot1_2" 
                                        Text="EAR" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -470,7 +1117,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="EarSlot2" 
+                                <Label x:Name="EarSlot2_2" 
                                        Text="EAR" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -485,7 +1132,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="FaceSlot" 
+                                <Label x:Name="FaceSlot2" 
                                        Text="FACE" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -499,7 +1146,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="NeckSlot" 
+                                <Label x:Name="NeckSlot2" 
                                        Text="NECK" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -514,7 +1161,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="ChestSlot" 
+                                <Label x:Name="ChestSlot2" 
                                        Text="CHEST" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -529,7 +1176,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="HandsSlot" 
+                                <Label x:Name="HandsSlot2" 
                                        Text="HANDS" 
                                        TextColor="#FFD700"
                                        FontSize="6"
@@ -543,7 +1190,7 @@
                                     Stroke="#666666" 
                                     StrokeThickness="1"
                                     Margin="1">
-                                <Label x:Name="FeetSlot" 
+                                <Label x:Name="FeetSlot2" 
                                        Text="FEET" 
                                        TextColor="#FFD700"
                                        FontSize="7"
@@ -569,7 +1216,7 @@
                                HorizontalOptions="Center"/>
 
                         <!-- File name display -->
-                        <Label x:Name="FileNameLabel" 
+                        <Label x:Name="FileNameLabel2" 
                                Text="No file loaded" 
                                TextColor="#FFD700"
                                FontSize="10"
@@ -612,11 +1259,14 @@
 
                             <!-- Primary/Secondary weapons -->
                             <Border Grid.Row="0" Grid.Column="0" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="PrimarySlot" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="PrimarySlot2" 
                                        Text="PRIMARY" 
                                        TextColor="#FFD700"
                                        FontSize="8"
@@ -626,14 +1276,17 @@
                             </Border>
 
                             <Border Grid.Row="0" Grid.Column="1" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="SecondarySlot" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="SecondarySlot2" 
                                        Text="SECONDARY" 
                                        TextColor="#FFD700"
-                                       FontSize="7"
+                                       FontSize="8"
                                        FontAttributes="Bold"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"/>
@@ -641,11 +1294,14 @@
 
                             <!-- Range/Ammo -->
                             <Border Grid.Row="1" Grid.Column="0" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="RangeSlot" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="RangeSlot2" 
                                        Text="RANGE" 
                                        TextColor="#FFD700"
                                        FontSize="8"
@@ -655,11 +1311,14 @@
                             </Border>
 
                             <Border Grid.Row="1" Grid.Column="1" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="AmmoSlot" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="AmmoSlot2" 
                                        Text="AMMO" 
                                        TextColor="#FFD700"
                                        FontSize="8"
@@ -670,11 +1329,14 @@
 
                             <!-- Rings -->
                             <Border Grid.Row="2" Grid.Column="0" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="RingSlot1" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="RingSlot1_2" 
                                        Text="RING" 
                                        TextColor="#FFD700"
                                        FontSize="8"
@@ -684,11 +1346,14 @@
                             </Border>
 
                             <Border Grid.Row="2" Grid.Column="1" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="RingSlot2" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="RingSlot2_2" 
                                        Text="RING" 
                                        TextColor="#FFD700"
                                        FontSize="8"
@@ -699,11 +1364,14 @@
 
                             <!-- Charm -->
                             <Border Grid.Row="3" Grid.Column="0" 
-                                    BackgroundColor="#1a1a1a" 
-                                    Stroke="#666666" 
-                                    StrokeThickness="1"
+                                    BackgroundColor="#2a231c" 
+                                    Stroke="#594a38" 
+                                    StrokeThickness="2"
                                     Margin="2">
-                                <Label x:Name="CharmSlot" 
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2"/>
+                                </Border.StrokeShape>
+                                <Label x:Name="CharmSlot2" 
                                        Text="CHARM" 
                                        TextColor="#FFD700"
                                        FontSize="8"
@@ -715,6 +1383,6 @@
                     </Grid>
                 </Border>
             </Grid>
-        </Border>
-    </StackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

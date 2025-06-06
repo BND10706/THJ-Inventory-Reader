@@ -1,67 +1,31 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
+using THJ_Inventory_Reader.Models;
 
 namespace THJ_Inventory_Reader;
 
 public partial class MainPage : ContentPage
 {
-	private Dictionary<string, Label> equipmentSlots = new();
+	// Player inventory and collections
+	private PlayerInventory playerInventory = new PlayerInventory();
+	private ObservableCollection<InventoryItem> inventoryItems = new ObservableCollection<InventoryItem>();
+	private ObservableCollection<AltCurrency> altCurrencies = new ObservableCollection<AltCurrency>();
 
 	public MainPage()
 	{
 		InitializeComponent();
-		InitializeEquipmentSlots();
+
+		// Set up the collection views
+		InventoryItemsView.ItemsSource = inventoryItems;
+		AltCurrencyListView.ItemsSource = altCurrencies;
+
 		LoadDefaultInventory();
 	}
-	private void InitializeEquipmentSlots()
-	{
-		equipmentSlots = new Dictionary<string, Label>
-		{
-			{ "Head", HeadSlot },
-			{ "Face", FaceSlot },  // New Face slot
-			{ "Neck", NeckSlot },
-			{ "Ear", EarSlot1 },  // We'll handle multiple ears/rings specially
-			{ "Shoulders", ShoulderSlot },
-			{ "Arms", ArmsSlot },
-			{ "Wrist", WristSlot1 },  // We'll handle multiple wrists specially
-			{ "Hands", HandsSlot },
-			{ "Chest", ChestSlot },
-			{ "Back", BackSlot },
-			{ "Waist", WaistSlot },
-			{ "Legs", LegsSlot },
-			{ "Feet", FeetSlot },
-			{ "Ring", RingSlot1 },  // We'll handle multiple rings specially
-			{ "Fingers", RingSlot1 },  // Handle "Fingers" as Ring alias from inventory files
-			{ "Primary", PrimarySlot },
-			{ "Secondary", SecondarySlot },
-			{ "Range", RangeSlot },
-			{ "Ammo", AmmoSlot },
-			{ "Charm", CharmSlot }  // New Charm slot
-		};
-	}
-	private void OnFileMenuClicked(object? sender, EventArgs e)
-	{
-		Console.WriteLine("File menu clicked!");
-		System.Diagnostics.Debug.WriteLine("File menu clicked!");
-		FileMenu.IsVisible = !FileMenu.IsVisible;
-		Console.WriteLine($"File menu visibility set to: {FileMenu.IsVisible}");
-	}
-	private async void OnCloseMenuClicked(object? sender, EventArgs e)
-	{
-		Console.WriteLine("Close menu clicked!");
-		System.Diagnostics.Debug.WriteLine("Close menu clicked!");
-		await DisplayAlert("Info", "Closing menu...", "OK");
-		FileMenu.IsVisible = false;
-	}
+
 	private async void OnOpenFileClicked(object? sender, EventArgs e)
 	{
-		Console.WriteLine("Open file clicked!");
-		System.Diagnostics.Debug.WriteLine("Open file clicked!");
 		try
 		{
-			// Add debug feedback
-			await DisplayAlert("Info", "Opening file picker...", "OK");
-
-			// Simplified file picker that should work better on macOS
+			// Simplified file picker
 			var result = await FilePicker.PickAsync(new PickOptions
 			{
 				PickerTitle = "Select Inventory File"
@@ -70,11 +34,6 @@ public partial class MainPage : ContentPage
 			if (result != null)
 			{
 				await LoadInventoryFile(result);
-				FileMenu.IsVisible = false;
-			}
-			else
-			{
-				await DisplayAlert("Info", "No file selected", "OK");
 			}
 		}
 		catch (Exception ex)
@@ -88,193 +47,291 @@ public partial class MainPage : ContentPage
 		try
 		{
 			var content = await File.ReadAllTextAsync(file.FullPath);
-			ParseInventoryData(content);            // Update UI
+			ParseInventoryData(content);
 			FileNameLabel.Text = $"File: {file.FileName}";
+
+			// Hide main menu and show the inventory window
 			MainContent.IsVisible = false;
 			InventoryView.IsVisible = true;
 			InventoryView.InputTransparent = false;
+
+			// Update the duplicate label in case there are two display areas
+			if (FileNameLabel2 != null)
+			{
+				FileNameLabel2.Text = FileNameLabel.Text;
+			}
 		}
 		catch (Exception ex)
 		{
 			await DisplayAlert("Error", $"Failed to load inventory file: {ex.Message}", "OK");
 		}
 	}
+
 	private void ParseInventoryData(string content)
 	{
-		// Clear all equipment slots
-		ClearEquipmentSlots();
+		// Clear the inventory
+		playerInventory.Clear();
+		inventoryItems.Clear();
+		altCurrencies.Clear();
 
+		// Parse the data
 		var lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-		var earCount = 0;
-		var wristCount = 0;
-		var ringCount = 0;
 
-		// Skip header line and process data
-		for (int i = 1; i < lines.Length; i++)
+		// Skip header line if present
+		int startIndex = 0;
+		if (lines.Length > 0 && lines[0].Contains("Location") && lines[0].Contains("Name") && lines[0].Contains("ID"))
+		{
+			startIndex = 1;
+		}
+
+		// Process each line
+		for (int i = startIndex; i < lines.Length; i++)
 		{
 			var line = lines[i].Trim();
 			if (string.IsNullOrEmpty(line)) continue;
 
-			// Stop at Ammo line as requested
-			if (line.StartsWith("Ammo\t"))
-			{
-				// Add the Ammo line itself
-				var ammoData = line.Split('\t');
-				if (ammoData.Length >= 2)
-				{
-					SetEquipmentSlot("Ammo", ammoData[1]);
-				}
-				break;
-			}
-
 			var parts = line.Split('\t');
-			if (parts.Length >= 2)
+			if (parts.Length >= 5) // Full format with Location, Name, ID, Count, Slots
 			{
-				var location = parts[0];
-				var itemName = parts[1];
-
-				// Only show items that have a proper location (not slots)
-				if (!string.IsNullOrEmpty(location) && !location.Contains("-Slot"))
+				var item = new InventoryItem
 				{
-					// Handle multiple items of same type (ears, wrists, rings)
-					if (location == "Ear")
-					{
-						if (earCount == 0)
-							SetEquipmentSlot("Ear", itemName, EarSlot1);
-						else if (earCount == 1)
-							SetEquipmentSlot("Ear", itemName, EarSlot2);
-						earCount++;
-					}
-					else if (location == "Wrist")
-					{
-						if (wristCount == 0)
-							SetEquipmentSlot("Wrist", itemName, WristSlot1);
-						else if (wristCount == 1)
-							SetEquipmentSlot("Wrist", itemName, WristSlot2);
-						wristCount++;
-					}
-					else if (location == "Ring" || location == "Fingers")
-					{
-						if (ringCount == 0)
-							SetEquipmentSlot("Ring", itemName, RingSlot1);
-						else if (ringCount == 1)
-							SetEquipmentSlot("Ring", itemName, RingSlot2);
-						ringCount++;
-					}
-					else
-					{
-						SetEquipmentSlot(location, itemName);
-					}
-				}
+					Location = parts[0],
+					Name = parts[1],
+					ID = int.TryParse(parts[2], out var id) ? id : 0,
+					Count = int.TryParse(parts[3], out var count) ? count : 0,
+					Slots = int.TryParse(parts[4], out var slots) ? slots : 0
+				};
+
+				playerInventory.AddEquipmentItem(item);
+			}
+			else if (parts.Length >= 2) // Simple format with just Location and Name
+			{
+				var item = new InventoryItem
+				{
+					Location = parts[0],
+					Name = parts[1],
+					Count = 1
+				};
+
+				playerInventory.AddEquipmentItem(item);
+			}
+		}
+
+		// Update the UI with equipment data
+		UpdateEquipmentUI();
+
+		// Update the inventory grid
+		UpdateInventoryItems();
+
+		// For demo purposes, add some alt currency
+		if (altCurrencies.Count == 0)
+		{
+			altCurrencies.Add(new AltCurrency { Name = "Doubloons", Amount = 542 });
+			altCurrencies.Add(new AltCurrency { Name = "Marks of Valor", Amount = 1250 });
+			altCurrencies.Add(new AltCurrency { Name = "Chronobines", Amount = 375 });
+		}
+	}
+
+	private void UpdateEquipmentUI()
+	{
+		// Update head slot
+		UpdateSlotDisplay(HeadSlot, playerInventory.Head);
+
+		// Update face slot
+		UpdateSlotDisplay(FaceSlot, playerInventory.Face);
+
+		// Update ear slots
+		UpdateSlotDisplay(EarSlot1, playerInventory.LeftEar);
+		UpdateSlotDisplay(EarSlot2, playerInventory.RightEar);
+
+		// Update neck slot
+		UpdateSlotDisplay(NeckSlot, playerInventory.Neck);
+
+		// Update shoulder slot
+		UpdateSlotDisplay(ShoulderSlot, playerInventory.Shoulders);
+
+		// Update arms and back slots
+		UpdateSlotDisplay(ArmsSlot, playerInventory.Arms);
+		UpdateSlotDisplay(BackSlot, playerInventory.Back);
+
+		// Update chest and waist slots
+		UpdateSlotDisplay(ChestSlot, playerInventory.Chest);
+		UpdateSlotDisplay(WaistSlot, playerInventory.Waist);
+
+		// Update wrist slots
+		UpdateSlotDisplay(WristSlot1, playerInventory.LeftWrist);
+		UpdateSlotDisplay(WristSlot2, playerInventory.RightWrist);
+
+		// Update hands, legs, and feet
+		UpdateSlotDisplay(HandsSlot, playerInventory.Hands);
+		UpdateSlotDisplay(LegsSlot, playerInventory.Legs);
+		UpdateSlotDisplay(FeetSlot, playerInventory.Feet);
+
+		// Update ring slots
+		UpdateSlotDisplay(RingSlot1, playerInventory.LeftRing);
+		UpdateSlotDisplay(RingSlot2, playerInventory.RightRing);
+
+		// Update weapon slots
+		UpdateSlotDisplay(PrimarySlot, playerInventory.Primary);
+		UpdateSlotDisplay(SecondarySlot, playerInventory.Secondary);
+
+		// Update range and ammo slots
+		UpdateSlotDisplay(RangeSlot, playerInventory.Range);
+		UpdateSlotDisplay(AmmoSlot, playerInventory.Ammo);
+
+		// Update charm slot
+		UpdateSlotDisplay(CharmSlot, playerInventory.Charm);
+
+		// Update the stats panel
+		UpdateStatsPanel();
+	}
+
+	private void UpdateSlotDisplay(Label slotLabel, InventoryItem item)
+	{
+		if (item.IsEmpty)
+		{
+			// Reset to default
+			slotLabel.Text = GetSlotDefaultText(slotLabel);
+			slotLabel.TextColor = Colors.White;
+			slotLabel.FontSize = 8;
+		}
+		else
+		{
+			// Show item name
+			slotLabel.Text = item.GetShortName();
+			slotLabel.TextColor = Color.FromArgb(item.GetItemColor());
+			slotLabel.FontSize = 8;
+		}
+	}
+
+	private void UpdateInventoryItems()
+	{
+		inventoryItems.Clear();
+
+		// Add all non-empty items from the player inventory
+		foreach (var item in playerInventory.Items)
+		{
+			if (!item.IsEmpty)
+			{
+				inventoryItems.Add(item);
 			}
 		}
 	}
-	private void ClearEquipmentSlots()
-	{
-		foreach (var slot in equipmentSlots.Values)
-		{
-			slot.Text = GetSlotDefaultText(slot);
-			slot.TextColor = Colors.White;
-			slot.FontSize = 10;
-		}
 
-		// Clear additional slots
-		EarSlot2.Text = "EAR";
-		EarSlot2.TextColor = Colors.White;
-		WristSlot2.Text = "WRIST";
-		WristSlot2.TextColor = Colors.White;
-		RingSlot2.Text = "RING";
-		RingSlot2.TextColor = Colors.White;
+	private void UpdateStatsPanel()
+	{
+		// Update the stats labels with player inventory stats
+		StatSTR.Text = playerInventory.Strength.ToString();
+		StatSTA.Text = playerInventory.Stamina.ToString();
+		StatAGI.Text = playerInventory.Agility.ToString();
+		StatDEX.Text = playerInventory.Dexterity.ToString();
+		StatWIS.Text = playerInventory.Wisdom.ToString();
+		StatINT.Text = playerInventory.Intelligence.ToString();
+		StatCHA.Text = playerInventory.Charisma.ToString();
+
+		StatHP.Text = $"{playerInventory.CurrentHP}/{playerInventory.MaxHP}";
+		StatMANA.Text = $"{playerInventory.CurrentMana}/{playerInventory.MaxMana}";
+		StatENDUR.Text = $"{playerInventory.CurrentEndurance}/{playerInventory.MaxEndurance}";
 	}
 
-	private void SetEquipmentSlot(string slotType, string itemName, Label? specificSlot = null)
-	{
-		var targetSlot = specificSlot ?? equipmentSlots.GetValueOrDefault(slotType);
-		if (targetSlot != null)
-		{
-			// Truncate long item names for display
-			var displayName = itemName.Length > 15 ? itemName.Substring(0, 12) + "..." : itemName;
-			targetSlot.Text = displayName;
-			targetSlot.TextColor = Colors.Gold;  // Gold color for equipped items
-			targetSlot.FontSize = 9;
-		}
-	}
 	private string GetSlotDefaultText(Label slot)
 	{
-		if (slot == HeadSlot) return "HEAD";
-		if (slot == FaceSlot) return "FACE";
-		if (slot == NeckSlot) return "NECK";
-		if (slot == EarSlot1) return "EAR";
-		if (slot == ShoulderSlot) return "SHLD";
-		if (slot == ArmsSlot) return "ARMS";
-		if (slot == WristSlot1) return "WRIST";
-		if (slot == HandsSlot) return "HANDS";
-		if (slot == ChestSlot) return "CHEST";
-		if (slot == BackSlot) return "BACK";
-		if (slot == WaistSlot) return "WAIST";
-		if (slot == LegsSlot) return "LEGS";
-		if (slot == FeetSlot) return "FEET";
-		if (slot == RingSlot1) return "RING";
-		if (slot == PrimarySlot) return "PRI";
-		if (slot == SecondarySlot) return "SEC";
-		if (slot == RangeSlot) return "RNG";
-		if (slot == AmmoSlot) return "AMMO";
-		if (slot == CharmSlot) return "CHARM";
-		return "Empty";
+		// Extract the default text from the label name
+		var name = slot.StyleId ?? slot.AutomationId ?? slot.Text;
+
+		if (name?.Contains("Slot") == true)
+		{
+			// Extract the base name without "Slot" and any numbers
+			var baseName = new string(name.TakeWhile(c => !char.IsDigit(c)).ToArray()).Replace("Slot", "").ToUpper();
+			return baseName;
+		}
+
+		return slot.Text;
 	}
+
 	private void LoadDefaultInventory()
 	{
-		try
-		{           // Create a default inventory with sample EverQuest items
-			var defaultInventoryData = @"Location	Name	ID	Count	Slots
-Charm	Intricate Wooden Figurine	12034	1	6
-Head	Crown of the Froglok King	12034	1	8
-Face	Mask of the Ancients	19041	1	8
-Neck	Necklace of Superiority	5521	1	0
-Ear	Black Sapphire Electrum Earring	14761	1	8
-Ear	Earring of the Solstice	19041	1	8
-Shoulders	Pauldrons of the Deep Flame	25987	1	8
-Arms	Sleeves of the Keeper	8942	1	8
-Wrist	Bracelet of Clarification	6633	1	8
-Wrist	Bracer of Benevolence	7455	1	8
-Hands	Gauntlets of Fiery Might	11287	1	8
-Chest	Breastplate of Virulent Protection	31045	1	8
-Back	Cloak of Flames	9876	1	8
-Waist	Belt of the Great Turtle	4521	1	8
-Legs	Greaves of the Penitent	18934	1	8
-Feet	Boots of the Storm	3456	1	8
-Ring	Ring of the Ancients	2134	1	8
-Ring	Band of Eternal Flame	7789	1	8
-Primary	Fiery Defender	20456	1	0
-Secondary	Shield of the Righteous	15678	1	0
-Range	Elvish Longbow	8901	1	0
-Ammo	Platinum Tipped Arrow	234	200	0";
+		// Generate some sample data
+		var sampleData = @"LocationNameIDCountSlots
+CharmGolden Orb of Power1000111
+HeadHelm of the Ancients1000211
+FaceVeil of Shadows1000311
+EarRuby Earring1000411
+EarSapphire Earring1000511
+NeckAmulet of Protection1000611
+ShouldersPauldrons of Might1000711
+ArmsBracers of Quickness1000811
+BackCape of Invisibility1000911
+ChestBreastplate of Valor1001011
+WaistBelt of Giants1001111
+WristWristguard of Defense1001211
+WristBracelet of Speed1001311
+HandsGloves of Dexterity1001411
+LegsGreaves of Stability1001511
+FeetBoots of Swiftness1001611
+RingRing of Power (Legendary)2001711
+RingBand of Protection (Enchanted)1001811
+PrimarySword of Truth1001911
+SecondaryShield of Faith1002011
+RangeBow of Accuracy1002111
+AmmoQuiver of Endless Arrows10022201";
 
-			ParseInventoryData(defaultInventoryData);           // Update UI to show character sheet
-			FileNameLabel.Text = "Default EverQuest Character";
+		ParseInventoryData(sampleData);
+
+		// Set some character stats for the demo
+		playerInventory.Strength = 250;
+		playerInventory.Stamina = 220;
+		playerInventory.Agility = 180;
+		playerInventory.Dexterity = 200;
+		playerInventory.Wisdom = 150;
+		playerInventory.Intelligence = 160;
+		playerInventory.Charisma = 130;
+
+		playerInventory.CurrentHP = 2500;
+		playerInventory.MaxHP = 2500;
+		playerInventory.CurrentMana = 1800;
+		playerInventory.MaxMana = 2000;
+		playerInventory.CurrentEndurance = 900;
+		playerInventory.MaxEndurance = 1000;
+
+		UpdateEquipmentUI();
+	}
+
+	private async void OnLoadDefaultClicked(object? sender, EventArgs e)
+	{
+		try
+		{
+			LoadDefaultInventory();
+
+			// Hide main menu and show the inventory window
 			MainContent.IsVisible = false;
 			InventoryView.IsVisible = true;
 			InventoryView.InputTransparent = false;
+
+			// Update the filename label to indicate we're using default inventory
+			FileNameLabel.Text = "File: Default Sample Inventory";
+			if (FileNameLabel2 != null)
+			{
+				FileNameLabel2.Text = FileNameLabel.Text;
+			}
 		}
 		catch (Exception ex)
 		{
-			// Since this is no longer async, we'll just use console output for errors
-			System.Diagnostics.Debug.WriteLine($"Failed to load default inventory: {ex.Message}");
+			await DisplayAlert("Error", $"Failed to load default inventory: {ex.Message}", "OK");
 		}
 	}
-	private async void OnLoadDefaultClicked(object? sender, EventArgs e)
+
+	private async void OnExitClicked(object? sender, EventArgs e)
 	{
-		Console.WriteLine("Load default clicked!");
-		System.Diagnostics.Debug.WriteLine("Load default clicked!");
-		try
-		{
-			await DisplayAlert("Info", "Loading default character...", "OK");
-			LoadDefaultInventory();
-			FileMenu.IsVisible = false;
-		}
-		catch (Exception ex)
-		{
-			await DisplayAlert("Error", $"Failed to load default character: {ex.Message}", "OK");
-		}
+		// Close the application
+		Application.Current?.Quit();
+	}
+
+	private void OnCloseButtonClicked(object? sender, EventArgs e)
+	{
+		// Hide inventory view and show main menu
+		MainContent.IsVisible = true;
+		InventoryView.IsVisible = false;
+		InventoryView.InputTransparent = true;
 	}
 }
