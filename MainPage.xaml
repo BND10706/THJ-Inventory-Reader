@@ -1,3 +1,377 @@
+            <?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="THJ_Inventory_Reader.MainPage"
+             Title="THJ Inventory Reader"
+             BackgroundColor="#1a1a1a">
+
+    <!-- Main EverQuest-style Inventory Window -->
+    <Border BackgroundColor="#2a2a2a" 
+            Stroke="#6B4423" 
+            StrokeThickness="3"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="640"
+            HeightRequest="480">
+        
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>   <!-- Character Panel -->
+                <ColumnDefinition Width="200"/>   <!-- Stats Panel -->
+                <ColumnDefinition Width="240"/>   <!-- Inventory Panel -->
+            </Grid.ColumnDefinitions>
+            
+            <!-- Left Panel - Character Equipment -->
+            <Border Grid.Column="0" 
+                    BackgroundColor="#333333" 
+                    Stroke="#555555" 
+                    StrokeThickness="1"
+                    Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>   <!-- Title -->
+                        <RowDefinition Height="*"/>    <!-- Equipment Grid -->
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Character Title -->
+                    <Label Grid.Row="0" 
+                           Text="Equipment" 
+                           TextColor="#FFD700"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    
+                    <!-- Equipment Slots Grid -->
+                    <Grid Grid.Row="1" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>  <!-- Head, Ears -->
+                            <RowDefinition Height="35"/>  <!-- Face, Neck -->
+                            <RowDefinition Height="35"/>  <!-- Shoulders -->
+                            <RowDefinition Height="35"/>  <!-- Arms, Back -->
+                            <RowDefinition Height="35"/>  <!-- Chest -->
+                            <RowDefinition Height="35"/>  <!-- Wrists -->
+                            <RowDefinition Height="35"/>  <!-- Waist -->
+                            <RowDefinition Height="35"/>  <!-- Legs -->
+                            <RowDefinition Height="35"/>  <!-- Hands, Feet -->
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Row 0: Head and Ears -->
+                        <Border Grid.Row="0" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="HeadSlot" 
+                                   Text="HEAD" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <Border Grid.Row="0" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="EarSlot1" 
+                                   Text="EAR" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <Border Grid.Row="0" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="EarSlot2" 
+                                   Text="EAR" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 1: Face and Neck -->
+                        <Border Grid.Row="1" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="FaceSlot" 
+                                   Text="FACE" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <Border Grid.Row="1" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="NeckSlot" 
+                                   Text="NECK" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 2: Shoulders -->
+                        <Border Grid.Row="2" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="ShoulderSlot" 
+                                   Text="SHLD" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 3: Arms and Back -->
+                        <Border Grid.Row="3" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="ArmsSlot" 
+                                   Text="ARMS" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <Border Grid.Row="3" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="BackSlot" 
+                                   Text="BACK" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 4: Chest -->
+                        <Border Grid.Row="4" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="ChestSlot" 
+                                   Text="CHEST" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 5: Wrists -->
+                        <Border Grid.Row="5" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="WristSlot1" 
+                                   Text="WRIST" 
+                                   TextColor="#FFD700"
+                                   FontSize="6"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <Border Grid.Row="5" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="WristSlot2" 
+                                   Text="WRIST" 
+                                   TextColor="#FFD700"
+                                   FontSize="6"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 6: Waist -->
+                        <Border Grid.Row="6" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="WaistSlot" 
+                                   Text="WAIST" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 7: Legs -->
+                        <Border Grid.Row="7" Grid.Column="1" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="LegsSlot" 
+                                   Text="LEGS" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <!-- Row 8: Hands and Feet -->
+                        <Border Grid.Row="8" Grid.Column="0" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="HandsSlot" 
+                                   Text="HANDS" 
+                                   TextColor="#FFD700"
+                                   FontSize="6"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        
+                        <Border Grid.Row="8" Grid.Column="2" 
+                                BackgroundColor="#1a1a1a" 
+                                Stroke="#666666" 
+                                StrokeThickness="1"
+                                Margin="1">
+                            <Label x:Name="FeetSlot" 
+                                   Text="FEET" 
+                                   TextColor="#FFD700"
+                                   FontSize="7"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+            
+            <!-- Center Panel - Character Stats -->
+            <Border Grid.Column="1" 
+                    BackgroundColor="#333333" 
+                    Stroke="#555555" 
+                    StrokeThickness="1"
+                    Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>   <!-- Title -->
+                        <RowDefinition Height="60"/>   <!-- Health/Mana -->
+                        <RowDefinition Height="120"/>  <!-- Primary Stats -->
+                        <RowDefinition Height="90"/>   <!-- Combat Stats -->
+                        <RowDefinition Height="*"/>    <!-- Resistances -->
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Stats Title -->
+                    <Label Grid.Row="0" 
+                           Text="Character Stats" 
+                           TextColor="#FFD700"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    
+                    <!-- Health and Mana -->
+                    <StackLayout Grid.Row="1" Margin="10">
+                        <Label Text="HP: 100/100" 
+                               TextColor="#FF4444"
+                               FontSize="10"
+                               FontAttributes="Bold"/>
+                        <Label Text="MP: 50/50" 
+                               TextColor="#4444FF"
+                               FontSize="10"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                    
+                    <!-- Primary Stats -->
+                    <Grid Grid.Row="2" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Row="0" Text="STR: 75" TextColor="#FFD700" FontSize="9"/>
+                        <Label Grid.Row="1" Text="STA: 75" TextColor="#FFD700" FontSize="9"/>
+                        <Label Grid.Row="2" Text="AGI: 75" TextColor="#FFD700" FontSize="9"/>
+                        <Label Grid.Row="3" Text="DEX: 75" TextColor="#FFD700" FontSize="9"/>
+                        <Label Grid.Row="4" Text="WIS: 75" TextColor="#FFD700" FontSize="9"/>
+                        <Label Grid.Row="5" Text="INT: 75" TextColor="#FFD700" FontSize="9"/>
+                    </Grid>
+                    
+                    <!-- Combat Stats -->
+                    <Grid Grid.Row="3" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Row="0" Text="AC: 20" TextColor="#88FF88" FontSize="9"/>
+                        <Label Grid.Row="1" Text="ATK: 150" TextColor="#FF8888" FontSize="9"/>
+                        <Label Grid.Row="2" Text="STR: 75" TextColor="#FFD700" FontSize="9"/>
+                        <Label Grid.Row="3" Text="Level: 10" TextColor="#FFFFFF" FontSize="9"/>
+                    </Grid>
+                    
+                    <!-- Resistances -->
+                    <Grid Grid.Row="4" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Row="0" Text="vs Magic: 15" TextColor="#8888FF" FontSize="8"/>
+                        <Label Grid.Row="1" Text="vs Fire: 15" TextColor="#FF4444" FontSize="8"/>
+                        <Label Grid.Row="2" Text="vs Cold: 15" TextColor="#4488FF" FontSize="8"/>
+                        <Label Grid.Row="3" Text="vs Disease: 15" TextColor="#44FF44" FontSize="8"/>
+                        <Label Grid.Row="4" Text="vs Poison: 15" TextColor="#44FF88" FontSize="8"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            
             <!-- Right Panel - Inventory Grid -->
             <Border Grid.Column="2" 
                     BackgroundColor="#333333" 
