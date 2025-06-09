@@ -69,9 +69,7 @@
                     </StackLayout>
                 </Grid>
             </Border>
-        </Grid>
-        
-        <!-- Inventory Window (hidden at start) -->
+        </Grid>                        <!-- Inventory Window (hidden at start) -->
         <Grid x:Name="InventoryView" IsVisible="false" InputTransparent="true">
             <!-- Main window with light rock texture background (wnd_bg_light_rock.tga) -->
             <Border BackgroundColor="#4a3f2e" 
@@ -701,7 +699,7 @@
                                             <Border.StrokeShape>
                                                 <RoundRectangle CornerRadius="2"/>
                                             </Border.StrokeShape>
-                                            <Label x:Name="FileNameLabel2"
+                                            <Label x:Name="FileNameLabel"
                                                    Text="File: No file loaded" 
                                                    TextColor="#FFD700"
                                                    FontSize="12" 
@@ -1025,9 +1023,7 @@
         </Border>
     </StackLayout>
 
-    <!-- Inventory View (initially hidden, becomes visible after loading file) -->
-    <Grid x:Name="InventoryView" IsVisible="False" InputTransparent="False" 
-          BackgroundColor="#1a1a1a">
+    <!-- This duplicate InventoryView is being removed to fix conflicts -->
         <!-- Main EverQuest-style Inventory Window -->
         <Border BackgroundColor="#2a2a2a" 
                 Stroke="#6B4423" 
@@ -1216,7 +1212,7 @@
                                HorizontalOptions="Center"/>
 
                         <!-- File name display -->
-                        <Label x:Name="FileNameLabel2" 
+                        <Label x:Name="FileNameDisplay" 
                                Text="No file loaded" 
                                TextColor="#FFD700"
                                FontSize="10"
